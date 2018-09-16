@@ -1,0 +1,22 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Bunyk Taras"
+theme = "mainroad"
+
+
+[Params]
+  postSections = ["posts"] # the section pages to show on home page and the "Recent articles" widget
+
+[menu]
+
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = -110
+
+  [[menu.main]]
+    identifier = "blog"
+    name = "Old blog"
+    url = "https://bunyk.wordpress.com/"
+    weight = 100
