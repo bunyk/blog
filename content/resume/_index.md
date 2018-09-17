@@ -4,7 +4,6 @@ date: 2018-08-27T23:47:07+03:00
 menu:
     main:
         weight: -30
-draft: true
 ---
 
 1990 birth, Ukraine. Male. Bachelors degree in computer science.
