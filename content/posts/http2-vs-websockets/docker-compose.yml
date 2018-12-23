@@ -8,6 +8,7 @@ services:
             dockerfile: nginx.docker
         ports:
             - 8080:80
+            - 8083:443
     backend:
         image: backend
         build:
