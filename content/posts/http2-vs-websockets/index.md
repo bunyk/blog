@@ -44,11 +44,18 @@ It has Python3.7 inside, installs Sanic framework, exposes port 8080 and runs `s
 {{< include src="server.py">}}
 {{< /highlight >}}
 
-
-
 This is the HTML of dashboard:
 
 {{< highlight html >}}
 {{< include src="dashboard.html">}}
 {{< /highlight >}}
 
+It renders `CHARTS_COUNT` charts. We will work here with the function `loadData()`, to see what we could improve. But first - test our baseline. Run `docker-compose up` and check how quick it loads.
+
+{{< figure src="network_debug.png" title="Screenshot of network tab of browser debugger" width="600px">}}
+
+29 seconds for 50 graphs? When all the JavaScript was loaded from cache? Not cool. Not cool at all. But why it takes so much? Lets open request details:
+
+{{< figure src="request_timings.png" title="Time of separate request" width="600px">}}
+
+We see that 24 seconds are spent in **Blocked** state, and 4.5 in **Waiting**, everything else is negligible. Here what [Mozilla documentation](https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor/request_details#Timings) has to say about that states:

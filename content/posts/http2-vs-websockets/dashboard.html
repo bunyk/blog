@@ -5,12 +5,9 @@
     <title>Dashboard</title>
     <style>
         .chart {
-            width: 350px;
-            height: 200px;
-            margin: 3px;
-            border: 1px solid black;
-            position: relative;
-            float: left;
+            width: 350px; height: 200px;
+            margin: 3px; border: 1px solid black;
+            position: relative; float: left;
         }
     </style>
 </head>
@@ -29,7 +26,7 @@
 
 <script >
 const DATA_LEN = 50;
-const CHARTS_COUNT = 100;
+const CHARTS_COUNT = 50;
 
 var data = {
     charts: _.range(CHARTS_COUNT),
@@ -46,6 +43,7 @@ Vue.component('chart', {
 });
 
 var createChart = function(el, widget) {
+    // Load data and render line chart in given element
     loadData(widget, function(chart_data) {
       new Chart(el, {
           type: 'line',
@@ -67,6 +65,7 @@ new Vue({
 });
 
 function loadData(widget, cb) {
+    // Load data for widget given, and when it is loaded - call cb
     fetch('/api/data/' + widget + '?size=' + DATA_LEN).then(res => res.json()).then(cb);
 }
 </script>
