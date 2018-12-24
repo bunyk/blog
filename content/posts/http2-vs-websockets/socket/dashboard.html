@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        .chart {
+            width: 350px; height: 200px;
+            margin: 3px; border: 1px solid black;
+            position: relative; float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>Loaded charts: {{loaded_chart_count}}</p>
+        <div v-for="chart in charts" class="chart">
+            <chart :widget="chart" v-once></chart>
+        </div>
+    </div>
+  
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.min.js'></script>
+
+<script >
+const DATA_LEN = 50;
+const CHARTS_COUNT = 50;
+
+var data = {
+    charts: _.range(CHARTS_COUNT),
+    loaded_chart_count: 0,
+};
+
+
+Vue.component('chart', {
+  template: '<canvas width="350" height="200"></canvas>',
+  props: ['widget'],
+  mounted: function() {
+    createChart(this.$el, this.widget);
+  }
+});
+
+var createChart = function(el, widget) {
+    // Load data and render line chart in given element
+    loadData(widget, function(chart_data) {
+      new Chart(el, {
+          type: 'line',
+          data: {
+              labels: _.range(chart_data.length),
+              datasets: [{
+                  label: 'Data ' + widget,
+                  data: chart_data,
+              }]
+          },
+      });
+      data.loaded_chart_count ++;
+    });
+};
+
+new Vue({
+  el: "#app",
+  data: data
+});
+
+var ws = new WebSocket('ws://' + document.domain + ':' + location.port + '/api/ws/');
+var message_style = 'background: #222; color: #bada55';
+
+ws.onmessage = function (event) {
+    console.log('%c RECEIVED', message_style, event.data) 
+};
+window.send = function(msg) {
+    data = JSON.stringify(msg);
+    ws.send(data);
+    console.log('%c SENT', message_style, data);
+}
+
+function loadData(widget, cb) {
+    // Load data for widget given, and when it is loaded - call cb
+    // fetch('/api/data/' + widget + '?size=' + DATA_LEN).then(res => res.json()).then(cb);
+    cb([]);
+}
+</script>
+</body>
+</html>

@@ -92,6 +92,19 @@ But there is possibility to do all request over one connection and then receive 
 
 ## WebSockets
 
+First, for Nginx to pass WebSocket requests to backend server, we need to change location configuration for our api like this:
+
+{{< highlight nginx >}}
+        location /api/ {
+            proxy_pass      http://backend:8080/; # this line was here before, the rest are added
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "Upgrade";
+            proxy_set_header Host $host;
+            proxy_read_timeout 3600s;
+            proxy_send_timeout 3600s;
+        }
+{{< /highlight >}}
 
 
 ## HTTP2
@@ -105,7 +118,6 @@ But there is possibility to do all request over one connection and then receive 
 
         ssl_certificate /etc/ssl/certs/localhost.crt;
         ssl_certificate_key /etc/ssl/private/localhost.key;
-
 {{< /highlight >}}
 
 {{< highlight docker >}}
