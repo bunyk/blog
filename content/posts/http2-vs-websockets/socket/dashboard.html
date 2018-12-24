@@ -25,6 +25,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.min.js'></script>
 
 <script >
+console.time('load'); // Measure time from here to end of load
 const DATA_LEN = 50;
 const CHARTS_COUNT = 50;
 
@@ -56,30 +57,50 @@ var createChart = function(el, widget) {
           },
       });
       data.loaded_chart_count ++;
+      if(data.loaded_chart_count == CHARTS_COUNT) {
+        console.timeEnd('load'); // stop load timer
+      }
     });
 };
 
-new Vue({
-  el: "#app",
-  data: data
-});
-
 var ws = new WebSocket('ws://' + document.domain + ':' + location.port + '/api/ws/');
-var message_style = 'background: #222; color: #bada55';
 
+ws.onopen = function() {
+    // Vue instance should be created after socket is open because otherwise 
+    // components could try to send requests before it opens, and will fail
+    new Vue({
+      el: "#app",
+      data: data
+    });
+}
+
+var socketSubscribers = {};
 ws.onmessage = function (event) {
-    console.log('%c RECEIVED', message_style, event.data) 
+    var data = JSON.parse(event.data);
+    var subscriber = socketSubscribers[data.id];
+    if(subscriber) {
+        subscriber(data);
+        // TODO: maybe remove subscriber
+    };
 };
-window.send = function(msg) {
-    data = JSON.stringify(msg);
-    ws.send(data);
-    console.log('%c SENT', message_style, data);
+
+function get_unique_id() {
+    // Will not work for multiple users, for production use some UUID implementation
+    get_unique_id.uid = (get_unique_id.uid || 0) + 1;
+    return get_unique_id.uid
 }
 
 function loadData(widget, cb) {
     // Load data for widget given, and when it is loaded - call cb
-    // fetch('/api/data/' + widget + '?size=' + DATA_LEN).then(res => res.json()).then(cb);
-    cb([]);
+    var id = get_unique_id();
+    ws.send(JSON.stringify({
+        id: id, 
+        data: widget,
+        size: DATA_LEN,
+    }));
+    socketSubscribers[id] = function (data) {
+        cb(data.data);
+    };
 }
 </script>
 </body>

@@ -52,7 +52,7 @@ And the biggest listing in this post - HTML (well, mostly JavaScript) of dashboa
 {{< include src="dashboard.html">}}
 {{< /highlight >}}
 
-It loads Charts.js and Vue using CDN, and renders `CHARTS_COUNT` charts. We will work here with the function `loadData()`, to see what we could improve. But first - test our baseline. Run `docker-compose up` and check how quick it loads.
+It loads Charts.js and Vue using CDN, and renders `CHARTS_COUNT` charts. We will work here with the function `loadData()`, to see what we could improve. But first - test our baseline. Run `docker-compose up` and check how quick it loads. We could do it in console using `console.time`, and on network tab:
 
 {{< figure src="network_debug.png" title="Screenshot of network tab of browser debugger" width="600px">}}
 
@@ -106,10 +106,97 @@ First, for Nginx to pass WebSocket requests to backend server, we need to change
         }
 {{< /highlight >}}
 
+Then, as we will send all the requests and receive all the responses over one connection, and they will be received not in the same order as they were sent, we need to figure out how to match requests with responses. That could be done using unique ids, which define to which chart each response belongs.
+
+So, we will replace our `loadData` function that called `fetch` with following code:
+
+{{< highlight javascript >}}
+var ws = new WebSocket('ws://' + document.domain + ':' + location.port + '/api/ws/');
+
+ws.onopen = function() {
+    // Vue instance should be created after socket is open because otherwise 
+    // components could try to send requests before it opens, and will fail
+    new Vue({
+      el: "#app",
+      data: data
+    });
+}
+
+var socketSubscribers = {}; // will map request id's to repsponse handlers
+ws.onmessage = function (event) {
+    var data = JSON.parse(event.data);
+    var subscriber = socketSubscribers[data.id];
+    if(subscriber) {
+        subscriber(data);
+        // TODO: maybe remove subscriber
+    };
+};
+
+function get_unique_id() {
+    // Will not work for multiple users, for production use some UUID implementation
+    get_unique_id.uid = (get_unique_id.uid || 0) + 1;
+    return get_unique_id.uid
+}
+
+function loadData(widget, cb) {
+    // Load data for widget given, and when it is loaded - call cb
+    var id = get_unique_id();
+
+    // Send request 
+    ws.send(JSON.stringify({
+        id: id, 
+        data: widget,
+        size: DATA_LEN,
+    }));
+    // Add subscriber for response with this id
+    socketSubscribers[id] = function (data) {
+        cb(data.data);
+    };
+}
+{{< /highlight >}}
+
+This code is artifitially simplified to fit in this post, and for example proper ID generation, handling of errors, reconnect in case of lost connection are not implemented.
+
+Let's also look how server is changed. We need to add new handler for WebSocket endpoint:
+
+{{< highlight python >}}
+@app.websocket('/ws')
+async def websocket(request, websocket):
+    while True: # Run forever
+        data = await websocket.recv() # when receiving request from socket
+        
+        # start task to handle that, pass it socket
+        asyncio.create_task(handle_socket_data(websocket, data)) 
+
+async def handle_socket_data(websocket, data):
+    try:
+        json_data = json.loads(data)
+        data = json_data['data']
+        size = json_data.get('size', 10)
+        await websocket.send(json.dumps(dict(
+            id=json_data['id'],
+            data=await get_data(data, size)
+        )))
+    except Exception as e:
+        await websocket.send(json.dumps(dict(
+            error=str(e)
+        )))
+        return
+{{< /highlight >}}
+
+Server is not as complex as front-end part, but is is just because we are not re-implemented router here. Which we are likely to do if our goal was to multiplex multiple requests over one websocket.
+
+So, unfortunately Firefox does not have WebSocket debugger to see it's performance, but we used `console.time` to measure time from start of script execution to moment when `CHARTS_COUNT` charts are finished loading, and it gives me 5215ms. This is a lot better than 29 seconds. 5-6 times better.
+
+Could we do this even better? Well, time of each request is random and between 1 and 5 seconds, so if we will have it under 5 seconds it will be just an accident, but if better means not only faster but maintainable, then yes.
+
+This code above is very simple example. It becomes more complicated when you had different endpoints, so you will need to reimplement router for websockets handler. Then if you have different HTTP methods, you will also need add that into router and into the websocket payload. Then, if you need auth, cache control, you will start to reimplement HTTP. And it has a lot of features. For example, browser already has cache for requests, and is able to update it using different methods (Etag, If-Modified-Since). Frameworks already have routers, auth and stuff like that. 
+
+Additionally, if you have microservice architecture, will you create socket for each service? Or create microservice proxy that connects to other microservices over HTTP and provides websocket interface? Or add it to backlog and forget about it forever, because you will never get to it, because you will have support that huge pile of <del>sh</del> code you wrote to optimize page load time.
+
+So, let me show you a better way:
 
 ## HTTP2
-
-
 
 {{< highlight nginx >}}
         listen 443 ssl http2 default_server;

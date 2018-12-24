@@ -1,14 +1,15 @@
 import asyncio
 import random
+import json
 
 from sanic import Sanic
-from sanic.response import json
+from sanic.response import json as json_response
 
-app = Sanic() # It is almost like Flask, just asyncronous
+app = Sanic()
 
 @app.route('/data/<data:int>')
 async def return_data(request, data):
-    return json(get_data(
+    return json_response(get_data(
         data, int(request.args.get('size', 10))
     ))
 
@@ -29,32 +30,27 @@ async def get_data(data, size):
 
 @app.websocket('/ws')
 async def websocket(request, websocket):
-    while True:
-        data = await websocket.recv()
-        asyncio.create_task(handle_socket_data(websocket, data))
+    while True: # Run forever
+        data = await websocket.recv() # when receiving request from socket
+        
+        # start task to handle that, pass it socket
+        asyncio.create_task(handle_socket_data(websocket, data)) 
 
-async def handle_socket_data(websocket, data, router):
+async def handle_socket_data(websocket, data):
     try:
         json_data = json.loads(data)
-    except json.decoder.JSONDecodeError:
-        await websocket.send('Malformed json', data)
+        data = json_data['data']
+        size = json_data.get('size', 10)
+        await websocket.send(json.dumps(dict(
+            id=json_data['id'],
+            data=await get_data(data, size)
+        )))
+    except Exception as e:
+        await websocket.send(json.dumps(dict(
+            error=str(e)
+        )))
         return
-    if not isinstance(json_data, dict):
-        await websocket.send('Request should be object', json_data)
-        return
-    if 'id' not in json_data:
-        await websocket.send('no id in request', json_data)
-        return
-    if 'data' not in json_data:
-        await websocket.send('no data in request', json_data)
-        return
-    data = json_data['data']
-    size = json_data.get('size', 10)
 
-    await websocket.send(json.dumps(dict(
-        id=json_data['id'],
-        data=get_data(data, size)
-    )))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
