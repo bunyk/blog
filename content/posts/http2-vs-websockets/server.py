@@ -2,13 +2,13 @@ import asyncio
 import random
 
 from sanic import Sanic
-from sanic.response import json
+from sanic.response import json as json_response
 
 app = Sanic() # It is almost like Flask, just asyncronous
 
 @app.route('/data/<data:int>')
 async def return_data(request, data):
-    return json_response(get_data(
+    return json_response(await get_data(
         data, int(request.args.get('size', 10))
     ))
 

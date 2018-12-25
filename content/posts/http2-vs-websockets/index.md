@@ -192,11 +192,29 @@ Could we do this even better? Well, time of each request is random and between 1
 
 This code above is very simple example. It becomes more complicated when you had different endpoints, so you will need to reimplement router for websockets handler. Then if you have different HTTP methods, you will also need add that into router and into the websocket payload. Then, if you need auth, cache control, you will start to reimplement HTTP. And it has a lot of features. For example, browser already has cache for requests, and is able to update it using different methods (Etag, If-Modified-Since). Frameworks already have routers, auth and stuff like that. 
 
-Additionally, if you have microservice architecture, will you create socket for each service? Or create microservice proxy that connects to other microservices over HTTP and provides websocket interface? Or add it to backlog and forget about it forever, because you will never get to it, because you will have support that huge pile of <del>sh</del> code you wrote to optimize page load time.
+Additionally, if you have microservice architecture, will you create socket for each service? Or create microservice proxy that connects to other microservices over HTTP and provides websocket interface? Or add it to backlog and forget about it forever, because you will never get to it, because you will have to support that huge pile of <del>sh</del> code you wrote to optimize page load time.
 
 So, let me show you a better way:
 
 ## HTTP2
+
+First and biggest task that we need to do in order to use HTTP2 is to have TLS certificate for our domain. If you are serious about your app, you should have them for https anyway. For our experiments we could generate self-signed certificate for localhost using this command:
+
+{{< highlight bash >}}
+openssl req -x509 -out localhost.crt -keyout localhost.key \
+  -newkey rsa:2048 -nodes -sha256 \
+  -subj '/CN=localhost' -extensions EXT -config <( \
+   printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+{{< /highlight >}}
+
+Then just add them to Nginx container:
+
+{{< highlight docker >}}
+COPY localhost.crt /etc/ssl/certs/localhost.crt;
+COPY localhost.key /etc/ssl/private/localhost.key;
+{{< /highlight >}}
+
+And now, update `nginx.conf` server section with this:
 
 {{< highlight nginx >}}
         listen 443 ssl http2 default_server;
@@ -207,7 +225,16 @@ So, let me show you a better way:
         ssl_certificate_key /etc/ssl/private/localhost.key;
 {{< /highlight >}}
 
-{{< highlight docker >}}
-COPY localhost.crt /etc/ssl/certs/localhost.crt;
-COPY localhost.key /etc/ssl/private/localhost.key;
-{{< /highlight >}}
+Now, when we open https://localhost:8083/ in browser, and check network tab, we will see this:
+
+{{< figure src="http2_network_debug.png" title="Requests with HTTP2" width="600px">}}
+
+5.3 seconds, and all requests start in the same time. Same speed improvement as WebSockets, but this time we just changed Nginx config, and not touched front-end or back-end code at all. 
+
+Additional benefits from using HTTP is that it is now a lot easier to debug (you could explore websocket frames using Chrome debugger), but you could not reproduce socket request using `curl`. Also, here we automatically get browser cache, and compression of HTTP headers.
+
+Of course some old browsers could have no support HTTP2, but this should not worry us, because protocol is negotiated automatically.
+
+## Conclusion
+
+If you really have reason and resources to use WebSockets - use WebSockets. If your only task was to optimize page load, and you wanted to decrease time requests spend in blocked state - just turn on HTTP2, don't repeat my mistake.
