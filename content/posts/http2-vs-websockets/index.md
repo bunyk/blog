@@ -1,7 +1,6 @@
 ---
 title: "HTTP2 vs WebSockets: a study of dashboard performance"
 date: 2018-12-20T15:48:50+02:00
-draft: true
 ---
 
 In this post, we will compare the performance of different approaches to load data for analytics dashboards, or any page where we have lots of different requests to the same server.
