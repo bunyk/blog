@@ -1,6 +1,8 @@
 ---
 title: "SICP 1.1 The Elements of Programming"
 date: 2020-06-13T23:22:32+02:00
+tags:
+- SICP
 ---
 
 Decided to finally try and go through this book. Will try to keep journal with notes here.
