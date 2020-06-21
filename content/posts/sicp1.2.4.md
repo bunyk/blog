@@ -5,7 +5,7 @@ tags:
 - SICP
 ---
 
-Today I learned that ancient mit-scheme REPL could be improved with history & tab completion. Thanks to this [StackOverflow answer](https://stackoverflow.com/a/11916365/816449). That answer is not very recent too, but here we are trying to learn really ancien magic.
+Today I learned that ancient mit-scheme REPL could be improved with history & tab completion. Thanks to this [StackOverflow answer](https://stackoverflow.com/a/11916365/816449). `sudo apt-get install rlwrap`, and then run scheme as `rlwrap scheme` That answer is not very recent too, but here we are trying to learn really ancient magic.
 
 And [this section](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.4) really starts to feel like magic. In the end, I learned that there is a way to compute n-th Fibonacci number with time complexity `O(log(n))`. And just few sections before, authors show how computing Fibonacci sequence using wrong approach could blow up exponencially.
 
