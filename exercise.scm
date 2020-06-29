@@ -1,51 +1,62 @@
-(define (accumulate combiner null-value term a next b)
-  (if (> a b)
-    null-value
-    (combiner
-      (term a)
-      (accumulate combiner null-value term (next a) next b)
-    )
-  )
-)
 
-(define (sum term a next b)
-  (accumulate + 0 term a next b)
-)
-
-(define (product term a next b)
-  (accumulate * 1 term a next b)
-)
-
-(define (accumulate combiner null-value term a next b)
-  (define (iter a result)
-    (if (> a b)
+(define (cont-frac n d k)
+  (define (iter i result) 
+    (if (= i 0)
       result
-      (iter (next a) (combiner (term a) result))
-    )
-  )
-  (iter a null-value)
-)
-
-(define (filtered-accumulate combiner null-value term a next b filter)
-  (define (iter a result)
-    (if (> a b)
-      result
-      (if (filter a) 
-          (iter (next a) result)
-          (iter (next a) (combiner (term a) result))
+      (iter
+        (- i 1)
+        (/ (n i) (+ (d i) result))
       )
     )
   )
-  (iter a null-value)
+  (iter k 0)
 )
 
-(define (sum-of-squares-of-primes-in-interval a b)
-    (filtered-accumulate + 0 sqr a inc b prime?)
+
+(define (golden k)
+    (/ 1 (cont-frac (lambda (i) 1.0)
+           (lambda (i) 1.0)
+           k))
 )
 
-(define (product-of-relatively-primes-to n)
-    (define (!rel-prime x)
-      (not (= (gcd x n) 1))
-    )
-    (filtered-accumulate * 1 identity 1 inc n !rel-prime)
+(golden 12)
+;Value: 1.6180555555555558
+
+(define seq
+         (lambda (i)
+           (if (= (remainder i 3) 2)
+             (* (+ 1 (floor (/ i 3))) 2)
+             1.0
+            )
+         )
+)
+(seq 1)
+(seq 2)
+(seq 3)
+(seq 4)
+(seq 5)
+(seq 6)
+
+(define (e k)
+  (+ 2 (cont-frac
+         (lambda (i) 1.0)
+         (lambda (i)
+           (if (= (remainder i 3) 2)
+             (* (+ 1 (floor (/ i 3))) 2)
+             1.0
+            )
+         )
+         k
+  ))
+)
+
+
+(define (tan x k)
+  (let ((n_sqr (- 0 (* x x))))
+      (/ x (+ 1 (cont-frac
+        (lambda (i) n_sqr)
+        (lambda (i) (+ 1 (* i 2)))
+        k
+      )))
+  )
 )
