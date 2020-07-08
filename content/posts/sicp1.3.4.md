@@ -1,16 +1,57 @@
+---
+title: "SICP 1.3.4 Procedures as returned values"
+date: 2020-07-02T23:43:40+02:00
+tags:
+- SICP
+---
+
+Today I have learned that John Carmack was also challenged by SICP:
+
+> 100 pages into Structure and Interpretation of Computer Programs. I'm proud of myself for not skipping the Church Numerals exercise. [Twitter](https://twitter.com/ID_AA_Carmack/status/350028210551013376)
+
+I still need to get so far.
+
+<!-- more -->
+
+## Exercise 1.40
+
+{{< highlight scheme >}}
+(define (cubic a b c) 
+  (lambda (x) (+
+    (* x x x)
+    (* a x x)
+    (* b x)
+    c
+  ))
+)
+{{< /highlight >}}
+
+## Exercise 1.41
+
+{{< highlight scheme >}}
 (define (inc x) (+ x 1))
 
+(define (double f)
+  (lambda (x) (f (f x)))
+)
+{{< /highlight >}}
+
+
+## Exercise 1.42
+
+{{< highlight scheme >}}
 (define (sqr x) (* x x))
 
 (define (compose f g) 
   (lambda (x) (f (g x)))
 )
-(define (double f)
-  (lambda (x) (f (f x)))
-)
 
 ((compose sqr inc) 6)
+{{< /highlight >}}
 
+## Exercise 1.43
+
+{{< highlight scheme >}}
 (define (repeated f n) 
   (if (= n 1)
     f
@@ -20,7 +61,25 @@
     )
   )
 )
+{{< /highlight >}}
 
+## Exercise 1.44
+
+{{< highlight scheme >}}
+(define dx 0.000001)
+(define (smooth f)
+  (lambda (x) (/ (+
+    (f x)
+    (f (+ x dx))
+    (f (- x dx))
+  ) 3.0))
+)
+
+(repeated smooth 10)
+{{< /highlight >}}
+
+# Exercise 1.45
+{{< highlight scheme >}}
 (define tolerance 0.00001)
 (define (fixed-point f first-guess)
   (define (close-enough? v1 v2)
@@ -51,7 +110,12 @@
     1
   )
 )
+{{< /highlight >}}
+I saw on the internet solutions better than n / 2, but I would like to move on.
 
+# Exercise 1.46
+
+{{< highlight scheme >}}
 (define (iterative-improve good-enough next)
   (define (iter guess) 
     (if (good-enough guess)
@@ -75,7 +139,10 @@
 
 (define (fixed-point f first-guess)
   ((iterative-improve
-     (lambda (y) (~= (f y) y))
+     (lambda (y) (~= (f y) y)); not very optimal because we computing f twice 
      f
   ) first-guess)
 )
+{{< /highlight >}}
+
+And I could move to the chapter about data structures.
