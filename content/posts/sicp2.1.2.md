@@ -1,3 +1,56 @@
+---
+title: "SICP 2.1.2 Abstraction barriers"
+date: 2020-07-08T23:44:14+02:00
+tags:
+- SICP
+---
+
+In this section I'm starting to have strong need for types.
+
+Code in exercises becomes more verbose.
+<!-- more -->
+
+## Exercise 2.2
+
+{{< highlight scheme >}}
+(define make-segment cons)
+(define start-segment car)
+(define end-segment cdr)
+
+(define make-point cons)
+(define x-point car)
+(define y-point cdr)
+
+(define (mid-segment segment)
+  (let (
+    (s (start-segment segment))
+    (e (end-segment segment))
+  )
+
+  (make-point
+    (/ (+ (x-point s) (x-point e)) 2)
+    (/ (+ (y-point s) (y-point e)) 2)
+  ))
+)
+
+(define (print-point p)
+  (newline)
+  (display "(")
+  (display (x-point p))
+  (display ",")
+  (display (y-point p))
+  (display ")"))
+
+(define a (make-point 1.0 2.0))
+(define b (make-point 3.0 4.0))
+(define ab (make-segment a b))
+
+(print-point (mid-segment ab))
+{{< /highlight >}}
+
+## Exercise 2.3
+
+{{< highlight scheme >}}
 (define make-rect cons)
 
 (define (area rect) 
@@ -57,40 +110,4 @@
     (y-point (cdr rect))
   ))
 )
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(define make-segment cons)
-(define start-segment car)
-(define end-segment cdr)
-
-(define make-point cons)
-(define x-point car)
-(define y-point cdr)
-
-(define (mid-segment segment)
-  (let (
-    (s (start-segment segment))
-    (e (end-segment segment))
-  )
-
-  (make-point
-    (/ (+ (x-point s) (x-point e)) 2)
-    (/ (+ (y-point s) (y-point e)) 2)
-  ))
-)
-
-(define (print-point p)
-  (newline)
-  (display "(")
-  (display (x-point p))
-  (display ",")
-  (display (y-point p))
-  (display ")"))
-
-(define a (make-point 1.0 2.0))
-(define b (make-point 3.0 4.0))
-(define ab (make-segment a b))
-
-(print-point (mid-segment ab))
+{{< /highlight >}}
