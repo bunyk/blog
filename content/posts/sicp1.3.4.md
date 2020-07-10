@@ -11,7 +11,7 @@ Today I have learned that John Carmack was also challenged by SICP:
 
 I still need to get so far.
 
-<!-- more -->
+<!--more-->
 
 ## Exercise 1.40
 

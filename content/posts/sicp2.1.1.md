@@ -8,6 +8,8 @@ tags:
 ## Exercise 2.1
 Here is how you construct rational number:
 
+<!--more-->
+
 {{< highlight scheme >}}
 (define (make-rat n d)
   (let ((g (gcd n d))

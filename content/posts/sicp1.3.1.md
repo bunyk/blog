@@ -6,7 +6,8 @@ tags:
 ---
 
 Solving more exercises, trying not to skip to be able to learn next chapters better.
-<!-- more -->
+
+<!--more-->
 
 ## Exercise 1.29 Simpson rule integration
 

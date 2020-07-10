@@ -5,6 +5,10 @@ tags:
 - SICP
 ---
 
+A little bit of number theory.
+
+<!--more-->
+
 ## Exercise 1.21: Smallest divisors
 This is so trivial, so I'll try to rewrite example, because it's just copypaste otherwise:
 

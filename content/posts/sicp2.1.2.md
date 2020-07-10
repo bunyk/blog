@@ -8,7 +8,8 @@ tags:
 In this section I'm starting to have strong need for types.
 
 Code in exercises becomes more verbose.
-<!-- more -->
+
+<!--more-->
 
 ## Exercise 2.2
 

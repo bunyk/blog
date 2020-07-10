@@ -7,7 +7,7 @@ tags:
 
 I'll attach solution from previous section to this post as it was the only exercise there.
 
-<!-- more -->
+<!--more-->
 
 ## Exercise 1.34 Runtime error with types
 
