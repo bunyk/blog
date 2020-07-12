@@ -1,96 +1,19 @@
-(define make-rect cons)
+(define zero (lambda (f) (lambda (x) x)))
 
-(define (area rect) 
-  (* (width-rect rect) (height-rect rect))
+(define (inc n) (lambda (f) (lambda (x) (f ((n f) x)))))
+
+(define one (lambda (f) (lambda (x) (f x))))
+
+(define two (lambda (f) (lambda (x) (f (f x)))))
+
+(define (plus a b)
+    (lambda (f) (lambda (x) ((a f) ((b f) x))))
 )
 
-(define (perimeter rect) 
-  (* 2 (+ (width-rect rect) (height-rect rect)))
+; To debug if I placed parentheses correctly :)
+(define (church-to-int n)
+  ((n (lambda (x) (+ x 1))) 0)
 )
 
-(define (sqr x) (* x x))
-;; Some useful stuff for testing
-
-;  d  c
-;
-;  a  b
-(define a (make-point 0.0 0.0))
-(define b (make-point 1.0 0.0))
-(define c (make-point 1.0 1.0))
-(define d (make-point 0.0 1.0))
-
-(define ab (make-segment a b))
-(define ad (make-segment a d))
-
-;;; representation 1 - adjacent sides
-(define rect (make-rect ab ad))
-
-(define (distance point-a point-b)
-  (sqrt (+
-      (sqr (- (x-point point-a) (x-point point-b)))
-      (sqr (- (y-point point-a) (y-point point-b)))
-  ))
-)
-(define (length segment)
-  (distance (start-segment segment) (end-segment segment))
-)
-(define (width-rect rect)
-  (length (car rect))
-)
-(define (height-rect rect)
-  (length (cdr rect))
-)
-
-;;; representation 2 - opposite points 
-
-(define rect (make-rect a c))
-
-(define (width-rect rect)
-  (abs (-
-    (x-point (car rect))
-    (x-point (cdr rect))
-  ))
-)
-(define (height-rect rect)
-  (abs (-
-    (y-point (car rect))
-    (y-point (cdr rect))
-  ))
-)
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(define make-segment cons)
-(define start-segment car)
-(define end-segment cdr)
-
-(define make-point cons)
-(define x-point car)
-(define y-point cdr)
-
-(define (mid-segment segment)
-  (let (
-    (s (start-segment segment))
-    (e (end-segment segment))
-  )
-
-  (make-point
-    (/ (+ (x-point s) (x-point e)) 2)
-    (/ (+ (y-point s) (y-point e)) 2)
-  ))
-)
-
-(define (print-point p)
-  (newline)
-  (display "(")
-  (display (x-point p))
-  (display ",")
-  (display (y-point p))
-  (display ")"))
-
-(define a (make-point 1.0 2.0))
-(define b (make-point 3.0 4.0))
-(define ab (make-segment a b))
-
-(print-point (mid-segment ab))
+(church-to-int (plus one two))
+;Value: 3
