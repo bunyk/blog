@@ -1,2 +1,1 @@
-## Exercise 2.59
-
+## Exercise 2.67
