@@ -1,7 +1,8 @@
-baseURL = "http://example.org/"
+baseURL = "http://bunyk.github.io/"
 languageCode = "en-us"
 title = "Bunyk Taras"
 theme = "mainroad"
+disqusShortname = "bunykshumblehomepage"
 
 
 [Params]
