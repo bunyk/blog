@@ -41,7 +41,7 @@ Compare and contrast with other texts. Does it agree or disagree?
 
 Reading is actually a conversation with an author.
 
-**Annotating** is almost synonymouns with taking notes, but refers to making notes directly in text - underlining/higlighting, writing on margins... You could use post-its to add annotations in book you don't want to damage. 
+**Annotating** is almost synonymous with taking notes, but refers to making notes directly in text - underlining/highlighting, writing on margins... You could use post-its to add annotations in book you don't want to damage. 
 
 As an exercise for this chapter it was advised to write notes for the article [What I Really Want Is Someone Rolling Around in the Text](https://www.nytimes.com/2011/03/06/magazine/06Riff-t.html). Here are [my notes](#taking-notes).
 
@@ -77,7 +77,7 @@ Imagine topic is a person and ask it questions:
 1. Your full name? Does someone know you by different name?
 2. How does dictionary or encyclopedia define you?
 3. Where, how and when you are born?
-4. Ary you still alive? How you died?
+4. Are you still alive? How you died?
 5. To what group do you belong? Who are others in your group?
 6. Can you be divided in parts? How?
 7. Were you different in the past? Will you change in the future?
@@ -91,21 +91,23 @@ Imagine topic is a person and ask it questions:
 
 ## Drafting and revision
 Creating a draft:
+
 1. Write outline
 2. Write introduction
-3. Write paragrapsh
+3. Write paragraphs
 4. Write conclusion
 
-After the first draft comes revision(s). You don't focus on grammar and spelling at first, first you reogranize secions, delete unnecessary, add missing, provide additional examples, add clarity to arguments, etc...
+After the first draft comes revision(s). You don't focus on grammar and spelling at first, first you reorganize sections, delete unnecessary, add missing, provide additional examples, add clarity to arguments, etc...
 
 Revision checklist:
+
 1. Is title interesting and descriptive?
 2. Does opening catches attention? 
 3. Will your readers learn something interesting?
 4. Is it organized logically?
-5. Do you support your ideas with exaples?
+5. Do you support your ideas with examples?
 6. Is there unnecessary information to remove?
-7. Are transitions effectve from one idea to next?
+7. Are transitions from one idea to next effective?
 8. Is conclusion satisfying and leaves the reader with a food for thought?
 9. Tone and diction
 10. Vocabulary
@@ -113,6 +115,7 @@ Revision checklist:
 12. Grammar
 
 Some tricks to catch errors:
+
 - Read the text backwards
 - Read it aloud
 - Listen to it using text to speech software.
@@ -144,20 +147,22 @@ I'm not sure yet, as I rarely get feedback on it, except one from the spellcheck
 
 ### Wordiness
 Reasons for excessive wordiness:
+
 - Trying to sound too formal
 - Not knowing more precise vocabulary
 - Unnecessary and vague modifiers. Remove words like very, quite, really, etc...
 - Use active voice instead of passive
-- Remove personal commentary: I belive, I just want to say...
+- Remove personal commentary: I believe, I just want to say...
 
 ### Spelling
-To know how to spell properly is useful even with spellcheckers everywhere. First, spellcheckers don't catch all errors, if misspelled word looks as correctly spelled different word. Second, there are no spellcheckers in hadnwriting...
+To know how to spell properly is useful even with spellcheckers everywhere. First, spellcheckers don't catch all errors, if misspelled word looks as correctly spelled different word. Second, there are no spellcheckers in handwriting...
 
 Ways to practice spelling:
-- Word games: Scrabble, words with friends...
-- Dictation. Also helps with the listening comprehension. You just need to have some correctly written text read aloud slowly enough by someone, type it  into text file, then compare with correct version using diff program like meld (or just regular diff). I just don't know where to find such texts. Audiobooks would have been nice, but how to reduce their speed and still make them pleasant to listen? Maybe there is some audioplayer that could make a pause at the end of each sentence said? 
 
-Fun fact: English spelling is hard because it uses albphabet for another language - Latin, which sounded differently.
+- Word games: Scrabble, words with friends...
+- Dictation. Also helps with the listening comprehension. You just need to have some correctly written text read aloud slowly enough by someone, type it  into text file, then compare with correct version using diff program like meld (or just regular diff). I just don't know where to find such texts. Audio books would have been nice, but how to reduce their speed and still make them pleasant to listen? Maybe there is some audio player that could make a pause at the end of each sentence said? 
+
+Fun fact: English spelling is hard because it uses alphabet for another language - Latin, which sounded differently.
 
 ## Diction
 
@@ -174,10 +179,10 @@ Common diction errors:
 
 * Among/between Between involves 2 objects, among > 2
 * Everyday/Every day. Everyday - adjective = typical. Every day - when something happens.
-* mom,dad/mother,father - formal and imformal forms.
-* you guys - informal. All of you - formal.
+* Mom,dad/mother,father - formal and informal forms.
+* You guys - informal. All of you - formal.
 * Infer/imply. Infer is act of thinking. Imply - meaning of something said.
-* it's/its. it's - it is. Its - possesive
+* It's/its. It's - it is. Its - possessive
 
 **Connotation** - idea or feeling that word holds in addition to main meaning (*denotation*). For example person that is saving money could be cheap, frugal, miserly or economical. Cheap and miserly have negative connotation. Frugal and economical - positive.
 
@@ -187,7 +192,7 @@ Common diction errors:
 
 1. Learn words in categories - kitchen (pot, bowl, ...), bedroom (blanket, pillow, ...)
 2. Journal. Write down all words that seem important, later use them in sentences.
-3. Learn collocations (words that often appear together). There are collocation dilctionaries online.
+3. Learn collocations (words that often appear together). There are collocation dictionaries online.
 4. Use mnemonics (like the ones on Memrise)
 5. Immediately use the word. Write it, speak it.
 6. Learn area specific vocabulary, use mindmaps to do it.
@@ -203,7 +208,7 @@ I did not done all the homeworks (as I did not submitted them). I thought that w
 
 Author found a book "How to read a Book". It seemed old and boring to him, but he remembered only one idea: "You don't really own a book until you marked it".
 
-He quickly adopted a habit of marginalia - making notes on marings, undelying important parts, marking keywords, writing down numbers of important pages at the end. It is common practice of effective study, but for him it felt like a way to more actively interact with text.
+He quickly adopted a habit of marginalia - making notes on margins, underlying important parts, marking keywords, writing down numbers of important pages at the end. It is common practice of effective study, but for him it felt like a way to more actively interact with text.
 
 His habit developed to more intense and complex. He has long list of different figures for markings, and it seems like addition. He rarely reads without writing instrument in hand.
 
@@ -213,7 +218,7 @@ Golden age of marginalia was in 1700-1850. Back then people used books like we n
 
 Marginalia could be a bridge between modern internet social networks and literature.
 
-A friend of author borrowed from him a book, but he needed it so took it back before she finished it. She had to use clean one. After finishing she told that she felt lonly reading unannotated version.
+A friend of author borrowed from him a book, but he needed it so took it back before she finished it. She had to use clean one. After finishing she told that she felt lonely reading unannotated version.
 
 He imagines putting his notes on transparent margin-sized plastic strips, so he could share them with friends, and receive notes from friends instead. Than he understood that this idea is more easier to implement using modern digital tech.
 
@@ -227,14 +232,14 @@ Such thing could be a Gutenberg-level revolution.
 
 He once published his marginalia in a magazine, under title "A year in marginalia" (for the year of reading). Feedback was positive.
 
-It seems natural in age of web2.0. YouTubers now do reviews of TV Shows, which is analoguous to marginalia.
+It seems natural in age of Web 2.0. YouTubers now do reviews of TV Shows, which is analogous to marginalia.
 
 Criticism now is very high level and thinks about big picture. Author wants "someone rolling around in test", more detailed, and more related to reading.
 
 
 
 **What was the main idea of the article?**
-Main idea is that writing and reading notes on the marins of the book is fun and useful activity, and it should be more popular, especially with e-books. 
+Main idea is that writing and reading notes on the margins of the book is fun and useful activity, and it should be more popular, especially with e-books. 
 
 **What was your opinion of the article?**
 Interesting article, gives idea about a new software projects, and also to try new way of reading.
@@ -261,9 +266,9 @@ From feedback at my job I understood that I need most improvement in making my w
 3. Make it sad and pessimistic.
 
 
-"Good Bye, Lenin!" is a German comedy-drama movie, events of which happen in Berlin. It is a story of a family divided by the wall, and their reaction to the fall of the wall. Mother of the family who strongly believes into the values of DDR, has accident and falls into a coma. She spends months in hospital without counsiousness, and when she wakes up, the wall is gone. Her son tries to hide that fact from her, because that would make her worry to much, and could lead to another accident. His efforts are the source of the humour of this film. All the rest is the drama about how the family tries to live through the time of changes. It is also educational, as it lets viewer to learn the facts about period in German history, and explains German ostalgie (nostalgie for the old times of DDR), without criticising or mocking it. It features the music of Yann Tiersen, which fits it very much, as it makes you to have fun and in the same time make you sad and nostalgic.
+"Good Bye, Lenin!" is a German comedy-drama movie, events of which happen in Berlin. It is a story of a family divided by the wall, and their reaction to the fall of the wall. Mother of the family who strongly believes into the values of DDR, has accident and falls into a coma. She spends months in hospital without consciousness, and when she wakes up, the wall is gone. Her son tries to hide that fact from her, because that would make her worry to much, and could lead to another accident. His efforts are the source of the humor of this film. All the rest is the drama about how the family tries to live through the time of changes. It is also educational, as it lets viewer to learn the facts about period in German history, and explains German ostalgie (nostalgie for the old times of DDR), without criticizing or mocking it. It features the music of Yann Tiersen, which fits it very much, as it makes you to have fun and in the same time make you sad and nostalgic.
 
 
-My wife thinks that we moved to Berlin because I wanted to better immerse myself into the cinematic universe of "Good Bye, Lenin!". That could partially be true, as this is one of my favourite movies, I rewatched more, then I have seen main character wake up in the Groundhog Day. So when I walk through the Karl-Marx Allee I think: "Oh, probably here they lived!". This feature everything Berlin is - world-famous healthcare in Charite, night clubs in weird facilities, picking up free <s>trash</s> stuff from the street, dumping your trash on the street, IKEA furniture and soft drinks as an vanguard of capitalist conquest of the socialistic city that is ongoing till today. Plot of the film is described by it's title, and if you don't know who or what Lenin is - it is symbol for socialism, the wall and all the bad and good stuff that comes with it. But the main hero, Alex, don't want his mother to know that it's time to say to the wall "Good bye". So Alex goes for help to his friend, Denis, who is big fan of the film "The Matrix" inferring from his T-Shirt. Together they create their own rea-life version of the Matrix, and put Alex's mother in there. Will she break from the Matrix? I won't tell you to not spoil the film. Watch it for yourself, it is worth the time.
+My wife thinks that we moved to Berlin because I wanted to better immerse myself into the cinematic universe of "Good Bye, Lenin!". That could partially be true, as this is one of my favorite movies, I rewatched more, then I have seen main character wake up in the Groundhog Day. So when I walk through the Karl-Marx Allee I think: "Oh, probably here they lived!". This feature everything Berlin is - world-famous healthcare in Charite, night clubs in weird facilities, picking up free <s>trash</s> stuff from the street, dumping your trash on the street, IKEA furniture and soft drinks as an vanguard of capitalist conquest of the socialistic city that is ongoing till today. Plot of the film is described by it's title, and if you don't know who or what Lenin is - it is symbol for socialism, the wall and all the bad and good stuff that comes with it. But the main hero, Alex, don't want his mother to know that it's time to say to the wall "Good bye". So Alex goes for help to his friend, Denis, who is big fan of the film "The Matrix" inferring from his T-Shirt. Together they create their own rea-life version of the Matrix, and put Alex's mother in there. Will she break from the Matrix? I won't tell you to not spoil the film. Watch it for yourself, it is worth the time.
 
-I'll pass thirt part of assignment, as I spent a lot of time on it already, and notthing just comes to my mind.
+I'll pass thirt part of assignment, as I spent a lot of time on it already, and nothing just comes to my mind.
