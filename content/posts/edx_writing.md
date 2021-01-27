@@ -5,6 +5,7 @@ toc: true
 tags:
 - MOOC
 - notes
+- on writing
 ---
 
 This post will contain my notes and assignments from the edX course [Academic and Business Writing](https://courses.edx.org/courses/course-v1:BerkeleyX+ColWri2.2x+1T2020/course/).
@@ -271,4 +272,4 @@ From feedback at my job I understood that I need most improvement in making my w
 
 My wife thinks that we moved to Berlin because I wanted to better immerse myself into the cinematic universe of "Good Bye, Lenin!". That could partially be true, as this is one of my favorite movies, I rewatched more, then I have seen main character wake up in the Groundhog Day. So when I walk through the Karl-Marx Allee I think: "Oh, probably here they lived!". This feature everything Berlin is - world-famous healthcare in Charite, night clubs in weird facilities, picking up free <s>trash</s> stuff from the street, dumping your trash on the street, IKEA furniture and soft drinks as an vanguard of capitalist conquest of the socialistic city that is ongoing till today. Plot of the film is described by it's title, and if you don't know who or what Lenin is - it is symbol for socialism, the wall and all the bad and good stuff that comes with it. But the main hero, Alex, don't want his mother to know that it's time to say to the wall "Good bye". So Alex goes for help to his friend, Denis, who is big fan of the film "The Matrix" inferring from his T-Shirt. Together they create their own rea-life version of the Matrix, and put Alex's mother in there. Will she break from the Matrix? I won't tell you to not spoil the film. Watch it for yourself, it is worth the time.
 
-I'll pass thirt part of assignment, as I spent a lot of time on it already, and nothing just comes to my mind.
+I'll pass third part of assignment, as I spent a lot of time on it already, and nothing just comes to my mind.
