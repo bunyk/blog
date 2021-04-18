@@ -1,4 +1,4 @@
 [submodule "public"]
-	path = public
+	path = out
 	url = git@github.com:bunyk/bunyk.github.com.git
 	branch = master
