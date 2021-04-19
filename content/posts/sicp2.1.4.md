@@ -9,7 +9,7 @@ Less mind-blowing ideas, more practice.
 
 <!--more-->
 
-{{< highlight scheme >}}
+```scheme
 (define (add-interval x y)
   (make-interval (+ (lower-bound x) (lower-bound y))
                  (+ (upper-bound x) (upper-bound y))))
@@ -26,11 +26,11 @@ Less mind-blowing ideas, more practice.
   (mul-interval x 
                 (make-interval (/ 1.0 (upper-bound y))
                                (/ 1.0 (lower-bound y)))))
-{{< /highlight >}}
+```
 
 ##  Exercise 2.7
 
-{{< highlight scheme >}}
+```scheme
 (define (make-interval a b) (cons a b))
 
 (define (lower-bound i)
@@ -38,17 +38,17 @@ Less mind-blowing ideas, more practice.
 
 (define (upper-bound i)
   (max (car i) (cdr i)))
-{{< /highlight >}}
+```
 
 
 ##  Exercise 2.8
 
-{{< highlight scheme >}}
+```scheme
 (define (sub-interval x y)
   (make-interval 
     (- (lower-bound x) (upper-bound y))
     (- (upper-bound x) (lower-bound y))))
-{{< /highlight >}}
+```
 
 ## Exercise 2.9
 
@@ -75,7 +75,7 @@ Gives interval of width 6. Width of multiplication could not be just function of
 
 ## Exercise 2.10
 
-{{< highlight scheme >}}
+```scheme
 (define (spans-zero i)
   (and (<= (lower-bound i) 0) (>= (upper-bound i) 0))
 )
@@ -88,11 +88,11 @@ Gives interval of width 6. Width of multiplication could not be just function of
                                (/ 1.0 (lower-bound y))))
   )
 )
-{{< /highlight >}}
+```
 
 ## Exercise 2.11
 
-{{< highlight scheme >}}
+```scheme
 (define (random-interval) 
   (make-interval (- (random 11) 5) (- (random 11) 5))
 )
@@ -166,7 +166,7 @@ Gives interval of width 6. Width of multiplication could not be just function of
     (else (error "impossible case"))
   ))
 )
-{{< /highlight >}}
+```
 
 Wow this took a lot of effort. Good that they teached to use let, without it secod version of mul-interval would be huge.
 
@@ -174,7 +174,7 @@ And this required lots of attention, but somehow my code passed the test from th
 
 ## Exercise 2.12
 
-{{< highlight scheme >}}
+```scheme
 (define (make-center-width c w)
   (make-interval (- c w) (+ c w)))
 (define (center i)
@@ -189,7 +189,7 @@ And this required lots of attention, but somehow my code passed the test from th
 (define (percent i)
   (* 100 (/ (width i) (center i)))
 )
-{{< /highlight >}}
+```
 
 ## Exercise 2.13
 
@@ -197,7 +197,7 @@ It's approximately addition.
 
 
 ## Exercise 2.14
-{{< highlight scheme >}}
+```scheme
 (define (par1 r1 r2)
   (div-interval (mul-interval r1 r2)
                 (add-interval r1 r2)))
@@ -216,7 +216,7 @@ It's approximately addition.
 
 (percent (par1 a b))
 (percent (par2 a b))
-{{< /highlight >}}
+```
 
 ## Exercise 2.15
 

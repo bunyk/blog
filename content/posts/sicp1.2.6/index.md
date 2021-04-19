@@ -12,7 +12,7 @@ A little bit of number theory.
 ## Exercise 1.21: Smallest divisors
 This is so trivial, so I'll try to rewrite example, because it's just copypaste otherwise:
 
-{{< highlight scheme >}}
+```scheme
 (define (divisor? d n) (= (remainder n d) 0))
 (define (smallest-divisor n)
     (define (find-divisor n d)
@@ -24,9 +24,9 @@ This is so trivial, so I'll try to rewrite example, because it's just copypaste 
     )
     (find-divisor n 2)
 )
-{{< /highlight >}}
+```
 
-{{< highlight scheme >}}
+```scheme
 1 ]=> (smallest-divisor 199)
 
 ;Value: 199
@@ -38,11 +38,11 @@ This is so trivial, so I'll try to rewrite example, because it's just copypaste 
 1 ]=> (smallest-divisor 19999)
 
 ;Value: 7
-{{< /highlight >}}
+```
 Well, that was unexpected. :)
 
 ## Exercise 1.22: 
-{{< highlight scheme >}}
+```scheme
 (define (prime? n)
   (= n (smallest-divisor n)))
 (define (next-prime n) 
@@ -66,13 +66,13 @@ Well, that was unexpected. :)
 (timed-prime-test 1000000000001)
 ; next prime after 1000000000001: 1000000000039
 ; Time: 1.3700000000000045
-{{< /highlight >}}
+```
 
 Seems to take 10 times more time for 100 times bigger number.
 
 
 ## Exercise 1.23
-{{< highlight scheme >}}
+```scheme
 (define (next n) 
     (if (= n 2) 3 (+ n 2))
 )
@@ -92,13 +92,13 @@ Seems to take 10 times more time for 100 times bigger number.
 
 (timed-prime-test 1000000000001)
 ; Time: .8000000000000114
-{{< /highlight >}}
+```
 
 A little bit less than twice as fast. I assume this is because calling next and doing comparisons inside it takes more time than just (+ n 1)
 
 ## Exercise 1.24
 
-{{< highlight scheme >}}
+```scheme
 (define (expmod base exp m)
   (cond ((= exp 0) 1)
         ((even? exp)
@@ -129,7 +129,7 @@ A little bit less than twice as fast. I assume this is because calling next and 
 (timed-prime-test 10000000000000000000001)
 ; next prime after 10000000000000000000001: 10000000000000000000009
 ; Time: 9.999999999990905e-3
-{{< /highlight >}}
+```
 
 Time seems to not change at all (but of course first search checked more numbers).
 
@@ -142,7 +142,7 @@ In correct `expmod`, every time `expmod` is recursively called with half of `exp
 In Louis Reasoner implementation, when `expmod` is called with halved `exp` argument, it is called twice, so halving the argument is compensated by doubling the tree of recursion, and that's why number of calls to `expmod` is proportional to the argument.
 
 ## Exercise 1.27
-{{< highlight scheme >}}
+```scheme
 (define (full-fermat n)
     (define (f-prime? a)
         (= (expmod a n n) a)
@@ -164,11 +164,11 @@ In Louis Reasoner implementation, when `expmod` is called with halved `exp` argu
 (full-fermat 561); #t
 (full-fermat 1105); #t
 (full-fermat 1729); #t
-{{< /highlight >}}
+```
 
 
 ## Exercise 1.28: Miller-Rabin test
-{{< highlight scheme >}}
+```scheme
 (define (!= a b) (not (= a b))) ; I need some Scheme reference, really. How this is not built-in?
 
 (define (report n m)
@@ -210,7 +210,7 @@ In Louis Reasoner implementation, when `expmod` is called with halved `exp` argu
 (fast-prime? 1009 30)
 (fast-prime? 13 30)
 (fast-prime? 6601 30)
-{{< /highlight >}}
+```
 
 Whew! How this even work - no idea, but somehow it does. Thankfully I'm good in this technique:
 

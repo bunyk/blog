@@ -7,9 +7,9 @@ import {getAllPostIds, getSortedPostsData} from '../../lib/posts'
 import {POSTS_PER_PAGE, SECTIONS} from '../../constants'
 
 
-export default function Page({page}) {
+export default function Page({page, pagePosts, totalPages}) {
     return <Layout title="Taras Bunyk" sections={SECTIONS}>
-        <PostList posts={[]} page={page}/>
+        <PostList posts={pagePosts} page={page} pages={totalPages}/>
         <Sidebar />
         <Footer />
     </Layout>
@@ -34,11 +34,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const allPosts = await getSortedPostsData();
-    const offset = params.page * POSTS_PER_PAGE;
+    const offset = (params.page - 1) * POSTS_PER_PAGE;
+    const pagePosts = allPosts.slice(offset, offset + POSTS_PER_PAGE)
     return {
         props: {
             page: params.page,
-            pagePosts: allPosts.slice(offset, offset + POSTS_PER_PAGE),
+            pagePosts: pagePosts,
             totalPages: Math.ceil(allPosts.length / POSTS_PER_PAGE)
         }
     }

@@ -8,7 +8,6 @@ import {POSTS_PER_PAGE, SECTIONS} from '../../constants'
 
 
 export default function Page({post}) {
-    console.log(post)
     return <Layout title={post.title} sections={SECTIONS}>
         <Post post={post}/>
         <Sidebar />

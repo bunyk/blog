@@ -15,7 +15,7 @@ I still need to get so far.
 
 ## Exercise 1.40
 
-{{< highlight scheme >}}
+```scheme
 (define (cubic a b c) 
   (lambda (x) (+
     (* x x x)
@@ -24,22 +24,22 @@ I still need to get so far.
     c
   ))
 )
-{{< /highlight >}}
+```
 
 ## Exercise 1.41
 
-{{< highlight scheme >}}
+```scheme
 (define (inc x) (+ x 1))
 
 (define (double f)
   (lambda (x) (f (f x)))
 )
-{{< /highlight >}}
+```
 
 
 ## Exercise 1.42
 
-{{< highlight scheme >}}
+```scheme
 (define (sqr x) (* x x))
 
 (define (compose f g) 
@@ -47,11 +47,11 @@ I still need to get so far.
 )
 
 ((compose sqr inc) 6)
-{{< /highlight >}}
+```
 
 ## Exercise 1.43
 
-{{< highlight scheme >}}
+```scheme
 (define (repeated f n) 
   (if (= n 1)
     f
@@ -61,11 +61,11 @@ I still need to get so far.
     )
   )
 )
-{{< /highlight >}}
+```
 
 ## Exercise 1.44
 
-{{< highlight scheme >}}
+```scheme
 (define dx 0.000001)
 (define (smooth f)
   (lambda (x) (/ (+
@@ -76,10 +76,10 @@ I still need to get so far.
 )
 
 (repeated smooth 10)
-{{< /highlight >}}
+```
 
 # Exercise 1.45
-{{< highlight scheme >}}
+```scheme
 (define tolerance 0.00001)
 (define (fixed-point f first-guess)
   (define (close-enough? v1 v2)
@@ -110,12 +110,12 @@ I still need to get so far.
     1
   )
 )
-{{< /highlight >}}
+```
 I saw on the internet solutions better than n / 2, but I would like to move on.
 
 # Exercise 1.46
 
-{{< highlight scheme >}}
+```scheme
 (define (iterative-improve good-enough next)
   (define (iter guess) 
     (if (good-enough guess)
@@ -143,6 +143,6 @@ I saw on the internet solutions better than n / 2, but I would like to move on.
      f
   ) first-guess)
 )
-{{< /highlight >}}
+```
 
 And I could move to the chapter about data structures.

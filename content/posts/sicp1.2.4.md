@@ -12,7 +12,7 @@ And [this section](https://mitpress.mit.edu/sites/default/files/sicp/full-text/b
 <!-- more -->
 
 ## Exercise 1.16: Fast exponentiation
-{{< highlight scheme >}}
+```scheme
 (define (sqr x) (* x x))
 (define (fast-exp x n) 
     (define (iter x n a) 
@@ -24,12 +24,12 @@ And [this section](https://mitpress.mit.edu/sites/default/files/sicp/full-text/b
     )
     (iter x n 1)
 )
-{{< /highlight >}}
+```
 
 
 ## Exercise 1.17: "Fast" multiplication
 
-{{< highlight scheme >}}
+```scheme
 (define (double x) (+ x x))
 (define (halve x) (/ x 2))
 
@@ -39,11 +39,11 @@ And [this section](https://mitpress.mit.edu/sites/default/files/sicp/full-text/b
         (else (+ a (fast-m a (- b 1)))
     )
 )
-{{< /highlight >}}
+```
 
 ## Exercise 1.18: Iterative multiplicaton
 
-{{< highlight scheme >}}
+```scheme
 (define (fast-m a b) 
     (define (iter a b p) 
        (cond
@@ -54,12 +54,12 @@ And [this section](https://mitpress.mit.edu/sites/default/files/sicp/full-text/b
     )
     (iter a b 0)
 )
-{{< /highlight >}}
+```
 
 ## Exercise 1.19: Fast Fibonacci
 With this exercise first, you discover that there is Fibonacci sequence inside Fibonacci formulas, and then, you figure out from where there appears exponential rise. Magical:
 
-{{< highlight scheme >}}
+```scheme
 (define (fib n)
   (fib-iter 1 0 0 1 n))
 (define (fib-iter a b p q count)
@@ -75,6 +75,6 @@ With this exercise first, you discover that there is Fibonacci sequence inside F
                         p
                         q
                         (- count 1)))))
-{{< /highlight >}}
+```
 
 I not dediced yet on how to get latex in Hugo, so I'll not add here my calculations for `p'` and `q'`.

@@ -12,7 +12,7 @@ Exercises to use sets and trees in practice. This topic reminds me of project in
 
 ## Exercise 2.67
 
-{{< highlight scheme >}}
+```scheme
 (define (make-leaf symbol weight)
   (list 'leaf symbol weight))
 (define (leaf? object)
@@ -71,11 +71,11 @@ Exercises to use sets and trees in practice. This topic reminds me of project in
 
 (decode sample-message sample-tree)
 ;Value 14: (a d a b b c a)
-{{< /highlight >}}
+```
 
 ## Exercise 2.68
 
-{{< highlight scheme >}}
+```scheme
 (define (encode message tree)
   (if (null? message)
       '()
@@ -103,12 +103,12 @@ Exercises to use sets and trees in practice. This topic reminds me of project in
 
 
 (encode '(a d a b b c a) sample-tree)
-{{< /highlight >}}
+```
 
 
 ## Exercise 2.69
 
-{{< highlight scheme >}}
+```scheme
 (define (make-leaf-set pairs)
   (if (null? pairs)
       '()
@@ -143,11 +143,11 @@ Exercises to use sets and trees in practice. This topic reminds me of project in
 )
 
 (generate-huffman-tree '((a 1) (b 1) (c 5)))
-{{< /highlight >}}
+```
 
 ## Exercise 2.70
 
-{{< highlight scheme >}}
+```scheme
 (define rock-code (generate-huffman-tree '(
     (A 	    2)
     (BOOM 	1)
@@ -171,20 +171,20 @@ Wah yip yip yip yip yip yip yip yip yip
 
 Sha boom
 ))
-{{< /highlight >}}
+```
 
 How many bits are required for encoding?
-{{< highlight scheme >}}
+```scheme
 (length (encode rock-song rock-code))
 ;Value: 84
-{{< /highlight >}}
+```
 
 What is the smallest number of bits that would be needed to encode this song if we used a fixed-length code for the eight-symbol alphabet? 
 
-{{< highlight scheme >}}
+```scheme
 (* 3 (length rock-song))
 ;Value: 108
-{{< /highlight >}}
+```
 
 ## Exercise 2.71
 

@@ -13,7 +13,7 @@ And now we are in the [middle of second chapter](https://mitpress.mit.edu/sites/
 
 ## Exercise 2.54
 
-{{< highlight scheme >}}
+```scheme
 (define (equal? l1 l2)
   (if (pair? l1)
     (if (pair? l2)
@@ -34,7 +34,7 @@ And now we are in the [middle of second chapter](https://mitpress.mit.edu/sites/
 (equal? 'a 'a)
 (equal? 'a 'b)
 (equal? '(1 2) '(list 1 2))
-{{< /highlight >}}
+```
 
 ## Exercise 2.55
 
@@ -43,7 +43,7 @@ And now we are in the [middle of second chapter](https://mitpress.mit.edu/sites/
 
 ## Exercise 2.56
 
-{{< highlight scheme >}}
+```scheme
 (define (variable? x) (symbol? x))
 
 (define (same-variable? v1 v2)
@@ -114,12 +114,12 @@ And now we are in the [middle of second chapter](https://mitpress.mit.edu/sites/
 
 
 (deriv '(+ (** x 3) (** x 2)) 'x)
-{{< /highlight >}}
+```
 
 ## Exercise 2.57
 
 
-{{< highlight scheme >}}
+```scheme
 (define (make-sum a1 a2)
   (cond ((=number? a1 0) a2)
         ((=number? a2 0) a1)
@@ -152,21 +152,21 @@ And now we are in the [middle of second chapter](https://mitpress.mit.edu/sites/
 
 (deriv '(+ x (* x x x) (** x 3)) 'x)
 ;Value 30: (+ 1 (+ (* x (+ x x)) (* x x)) (* 3 (** x 2)))
-{{< /highlight >}}
+```
 
 ## Exercise 2.58
 
 So, we want this to work:
 
-{{< highlight scheme >}}
+```scheme
 (deriv '(x + x**2 + 3 * x**3) 'x)
-{{< /highlight >}}
+```
 
 At first I wanted to add some parsing step that converts this to lisp, and then reread requirements, and found this: "Can you design appropriate predicates, selectors, and constructors for this notation such that our derivative program still works?"
 
 So, no transformation, this should be the format of data, and we need to change functions that work with it.
 
-{{< highlight scheme >}}
+```scheme
 (define (priority sym)
   (cond 
     ((eq? sym '+) 1)
@@ -273,6 +273,6 @@ So, no transformation, this should be the format of data, and we need to change 
         (else (list base '** e))))
 
 (deriv '(x + x ** 2 + 3 * x ** 3) 'x)
-{{< /highlight >}}
+```
 
 This is rather ugly (I don't like `before`, `after`, `unwrap` etc., it does not seem very performant to use them), but I see we will have another example Symbolic Algebra later, maybe there will be a chance to make it better.

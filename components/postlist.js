@@ -10,7 +10,7 @@ export default function PostList({posts, page, pages}) {
             return <Card key={p.id}>
                 <CardHeader
                     title={p.title}
-                    subheader={'Published: ' + p.date + ' Tags: ' + p.tags.join(', ')}
+                    subheader={'Published: ' + p.date + ' Tags: ' + (p.tags || []).join(', ')}
                 />
                 <CardContent dangerouslySetInnerHTML={{ __html: p.excerpt }} />
                 <CardActions>

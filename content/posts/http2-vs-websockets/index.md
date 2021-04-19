@@ -17,39 +17,39 @@ Static content will be served by Nginx server, which would also be a proxy to ou
 
 (If you are bored with lot's of code - scroll down, there will be explanations of what happens, I just publish it here to make this experiment reproducible)
 
-{{< highlight yml >}}
+```yml
 {{< include src="docker-compose.yml">}}
-{{< /highlight >}}
+```
 
 Nginx container just runs image with a copy of configuration file and our HTML inside:
 
-{{< highlight docker >}}
+```docker
 {{< include src="nginx.docker">}}
-{{< /highlight >}}
+```
 
 And this is its configuration file. It tells to listen at port 80, serve files from `/var/www`, and redirect requests to all URLs that have prefix `/api/` to our backend container:
 
-{{< highlight nginx >}}
+```
 {{< include src="nginx.conf">}}
-{{< /highlight >}}
+```
 
 Here is Dockerfile for backend server:
 
-{{< highlight docker >}}
+```docker
 {{< include src="backend.docker">}}
-{{< /highlight >}}
+```
 
 It has Python3.7 inside, installs Sanic framework, exposes port 8080 and runs `server.py`, which will provide us with data:
 
-{{< highlight python >}}
+```python
 {{< include src="server.py">}}
-{{< /highlight >}}
+```
 
 And the biggest listing in this post - HTML (well, mostly JavaScript) of the dashboard:
 
-{{< highlight html >}}
+```html
 {{< include src="dashboard.html">}}
-{{< /highlight >}}
+```
 
 It loads Charts.js and Vue using CDN and renders `CHARTS_COUNT` charts. We will work here with the function `loadData()`, to see what we could improve. But first - test our baseline. Run `docker-compose up` and check how quickly it loads. We could do it in browser console using `console.time`, and on network tab:
 
@@ -93,7 +93,7 @@ But there is a possibility to do all request over one connection and then receiv
 
 First, for Nginx to pass WebSocket requests to the backend server, we need to change location configuration for our API like this:
 
-{{< highlight nginx >}}
+```nginx
         location /api/ {
             proxy_pass      http://backend:8080/; # this line was here before, the rest are added
             proxy_http_version 1.1;
@@ -103,13 +103,13 @@ First, for Nginx to pass WebSocket requests to the backend server, we need to ch
             proxy_read_timeout 3600s;
             proxy_send_timeout 3600s;
         }
-{{< /highlight >}}
+```
 
 Then, as we will send all the requests and receive all the responses over one connection, and they will be received not in the same order as they were sent, we need to figure out how to match requests with responses. That could be done using unique ids, which define to which chart each response belongs.
 
 So, we will replace our `loadData` function that called `fetch` with the following code:
 
-{{< highlight javascript >}}
+```javascript
 var ws = new WebSocket('ws://' + document.domain + ':' + location.port + '/api/ws/');
 
 ws.onopen = function() {
@@ -152,13 +152,13 @@ function loadData(widget, cb) {
         cb(data.data);
     };
 }
-{{< /highlight >}}
+```
 
 This code is artificially simplified to fit in this post, and for example, proper ID generation, handling of errors, reconnect in case of lost connection are not implemented.
 
 Let's also look at how the server is changed. We need to add a new handler for WebSocket endpoint:
 
-{{< highlight python >}}
+```python
 @app.websocket('/ws')
 async def websocket(request, websocket):
     while True: # Run forever
@@ -181,7 +181,7 @@ async def handle_socket_data(websocket, data):
             error=str(e)
         )))
         return
-{{< /highlight >}}
+```
 
 The server is not as complex as front-end part, but it is just because we are not re-implemented router here. Which we are likely to do if our goal was to multiplex multiple requests over one WebSocket.
 
@@ -199,30 +199,30 @@ So, let me show you a better way:
 
 First and biggest task that we need to do in order to use HTTP2 is to have TLS certificate for our domain. If you are serious about your app, you should have them for https anyway. For our experiments we could generate a self-signed certificate for localhost using this command:
 
-{{< highlight bash >}}
+```bash
 openssl req -x509 -out localhost.crt -keyout localhost.key \
   -newkey rsa:2048 -nodes -sha256 \
   -subj '/CN=localhost' -extensions EXT -config <( \
    printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
-{{< /highlight >}}
+```
 
 Then just add that certificate to Nginx container:
 
-{{< highlight docker >}}
+```docker
 COPY localhost.crt /etc/ssl/certs/localhost.crt;
 COPY localhost.key /etc/ssl/private/localhost.key;
-{{< /highlight >}}
+```
 
 And now, update `nginx.conf` server section with this:
 
-{{< highlight nginx >}}
+```nginx
         listen 443 ssl http2 default_server;
         listen [::]:443 ssl http2 default_server;
         ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
 
         ssl_certificate /etc/ssl/certs/localhost.crt;
         ssl_certificate_key /etc/ssl/private/localhost.key;
-{{< /highlight >}}
+```
 
 Now, when we open https://localhost:8083/ in a browser, and check network tab, we will see this:
 

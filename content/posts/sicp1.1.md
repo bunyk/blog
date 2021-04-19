@@ -16,7 +16,7 @@ Then `scheme` command starts interpreter, `scheme --load sqr.scm` loads & evalua
 
 And here is my own implementation for finding the square root:
 
-{{< highlight scheme >}}
+```scheme
 (define (abs x)
   (if (< x 0)
     (- 0 x)
@@ -38,4 +38,4 @@ And here is my own implementation for finding the square root:
       guess
       (sqrt-iter (avg guess (/ x guess)))))
   (sqrt-iter 1.0))
-{{< /highlight >}}
+```
