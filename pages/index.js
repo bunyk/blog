@@ -1,25 +1,22 @@
-import Footer from '../components/footer'
-import Header from '../components/header'
-import Layout from '../components/layout'
 import PostList from '../components/postlist'
-import Sidebar from '../components/sidebar'
-import {getSortedPostsData} from '../lib/posts'
-import {SECTIONS, POSTS_PER_PAGE} from '../constants'
+import {getPageProps} from '../lib/posts'
 
-export default function Home({page, pages}) {
-    return <Layout title="Taras Bunyk" sections={SECTIONS}>
-        <PostList posts={page} page={1} pages={pages}/>
-        <Sidebar />
-        <Footer />
-    </Layout>
+export default function Home(props) {
+    return <PostList
+        posts={props.posts}
+        pageNumber={props.pageNumber}
+        pageURL={pageURL}
+        pagesCount={props.pages}
+        archives={props.archives}
+        topics={props.topics}
+    />
+}
+
+function pageURL(page) {
+    return `/page/${page}`
 }
 
 export async function getStaticProps({ params }) {
-    const allPosts = await getSortedPostsData();
-    return {
-        props: {
-            page: allPosts.slice(0, POSTS_PER_PAGE),
-            pages: Math.ceil(allPosts.length / POSTS_PER_PAGE)
-        }
-    }
+    const props = await getPageProps(1)
+    return {props}
 }
