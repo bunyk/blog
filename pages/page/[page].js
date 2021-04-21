@@ -1,9 +1,5 @@
-import Footer from '../../components/footer'
-import Header from '../../components/header'
-import Layout from '../../components/layout'
 import PostList from '../../components/postlist'
-import Sidebar from '../../components/sidebar'
-import {getAllPostIds, getSortedPostsData} from '../../lib/posts'
+import {getAllPostIds, getPageProps} from '../../lib/posts'
 import {POSTS_PER_PAGE} from '../../constants'
 
 
@@ -39,15 +35,8 @@ export async function getStaticPaths() {
     }
 }
 
+
 export async function getStaticProps({ params }) {
-    const allPosts = await getSortedPostsData();
-    const offset = (params.page - 1) * POSTS_PER_PAGE;
-    const pagePosts = allPosts.slice(offset, offset + POSTS_PER_PAGE)
-    return {
-        props: {
-            page: params.page,
-            pagePosts: pagePosts,
-            totalPages: Math.ceil(allPosts.length / POSTS_PER_PAGE)
-        }
-    }
+    const props = await getPageProps(params.page)
+    return {props}
 }
