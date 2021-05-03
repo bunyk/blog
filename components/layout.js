@@ -6,11 +6,11 @@ import Footer from './footer'
 
 import {SECTIONS, BLOG_TITLE} from '../constants'
 
-export default function Layout({children}) {
+export default function Layout({children, title}) {
     return <>
         <CssBaseline />
         <Container maxWidth="md">
-            <Header title={BLOG_TITLE} sections={SECTIONS}/>
+            <Header title={title || BLOG_TITLE}/>
             <Grid container spacing={5}>
                 {children}
                 <Footer />

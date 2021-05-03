@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import {Toolbar, Typography} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
+import {SECTIONS, BLOG_TITLE} from '../constants'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header({title, sections}) {
+export default function Header({title}) {
     const classes = useStyles();
     return <>
         <Head>
@@ -33,10 +34,10 @@ export default function Header({title, sections}) {
                 aligh="center"
                 className={classes.toolbarTitle}
                 noWrap
-            >{title}</Typography>
+            >{BLOG_TITLE}</Typography>
         </Toolbar>
         <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-            {sections.map((section) => {
+            {SECTIONS.map((section) => {
                 return <Link href={section.url} className={classes.toolbarLink} key={section.url} passHref>
                     {section.title}
                 </Link>
