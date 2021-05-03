@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import {Toolbar, Typography} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
+
 import {SECTIONS, BLOG_TITLE} from '../constants'
 
 const useStyles = makeStyles((theme) => ({
