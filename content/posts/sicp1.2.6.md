@@ -214,4 +214,5 @@ In Louis Reasoner implementation, when `expmod` is called with halved `exp` argu
 
 Whew! How this even work - no idea, but somehow it does. Thankfully I'm good in this technique:
 
-{{< figure src="trying-stuff-orly.jpg" width="400px">}}
+
+![Trying Stuff Until it Works](/content/trying-stuff-orly.jpg "Trying Stuff Until it Works")

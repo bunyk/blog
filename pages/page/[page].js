@@ -1,7 +1,5 @@
 import PostList from '../../components/postlist'
-import {getAllPostIds, getPageProps, pagesCount} from '../../lib/posts'
-import {POSTS_PER_PAGE} from '../../constants'
-
+import {getAllPostIds, getPageProps, pageCount} from '../../lib/posts'
 
 export default function Page(props) {
     return <PostList

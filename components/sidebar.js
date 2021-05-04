@@ -18,12 +18,14 @@ export default function Sidebar({archives, topics}) {
         <ul>
             {archives.map(a => <li key={a.url}>
                 <Link href={a.url}>{a.title}</Link>
+                &nbsp;<span title="posts count">({a.count})</span>
             </li>)}
         </ul>
         <Typography variant="h6" gutterBottom className={classes.sidebarSection}>Topics</Typography>
         <ul>
             {topics.map(a => <li key={a.url}>
                 <Link href={a.url}>{a.title}</Link>
+                &nbsp;<span title="posts count">({a.count})</span>
             </li>)}
         </ul>
     </Paper></Grid>

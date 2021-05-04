@@ -1,7 +1,5 @@
 import PostList from '../../../../components/postlist'
-import {getAllPostIds, getPageProps, pageCount} from '../../lib/posts'
-import {POSTS_PER_PAGE} from '../../../../constants'
-
+import {getPageProps, getPostsArchives, pageCount} from '../../../../lib/posts'
 
 export default function Page(props) {
     return <PostList
@@ -20,14 +18,16 @@ function pageURL(page) {
 
 export async function getStaticPaths() {
     const paths = [];
-    const ids = getAllPostIds();
-    let count = pageCount();
-    for(var i = 1; i<=count; i++) {
-        paths.push({
-            params: {
-                page: i.toString()
-            }
-        })
+    const months = await getPostsArchives();
+    for(var i=0; i<months.length; i++) {
+        for(var j = 1; j<=pageCount(months[i].count); j++) {
+            paths.push({
+                params: {
+                    page: j.toString(),
+                    month: months[i].id,
+                }
+            })
+        }
     }
     return {
         paths,
@@ -37,6 +37,6 @@ export async function getStaticPaths() {
 
 
 export async function getStaticProps({ params }) {
-    const props = await getPageProps(params.page)
+    const props = await getPageProps(params.page, params.month)
     return {props}
 }
