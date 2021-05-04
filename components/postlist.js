@@ -7,7 +7,7 @@ import Layout from './layout'
 import Sidebar from './sidebar'
 
 const useStyles = makeStyles((theme) => ({
-    card: {
+    spaced: {
         margin: theme.spacing(1),
     }
 }));
@@ -15,9 +15,9 @@ const useStyles = makeStyles((theme) => ({
 export default function PostList(props) {
     const classes = useStyles();
     return <Layout>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={9}>
             {props.posts.map(p => {
-                return <Card key={p.id} className={classes.card}>
+                return <Card key={p.id} className={classes.spaced}>
                     <CardHeader
                         title={p.title}
                         subheader={'Published: ' + p.date + ' Tags: ' + (p.tags || []).join(', ')}

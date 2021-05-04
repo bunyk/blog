@@ -3,9 +3,6 @@ import {Grid, Paper, Typography} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  sidebarAboutBox: {
-    padding: theme.spacing(2),
-  },
   sidebarSection: {
     marginTop: theme.spacing(3),
   },
@@ -13,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Sidebar({archives, topics}) {
     const classes = useStyles()
-    return <Grid item xs={12} md={4}><Paper className={classes.sidebarAboutBox}>
+    return <Grid item xs={12} md={3}>
         <Typography variant="h6" gutterBottom className={classes.sidebarSection}>Archives</Typography>
         <ul>
             {archives.map(a => <li key={a.url}>
@@ -28,5 +25,5 @@ export default function Sidebar({archives, topics}) {
                 &nbsp;<span title="posts count">({a.count})</span>
             </li>)}
         </ul>
-    </Paper></Grid>
+    </Grid>
 }
