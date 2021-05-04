@@ -6,7 +6,7 @@ export default function PostList({post}) {
         <Card>
             <CardHeader
                 title={post.title}
-                subheader={'Published: ' + post.date + ' Tags: ' + post.tags.join(', ')}
+                subheader={'Published: ' + post.date + ' Tags: ' + (post.tags || []).join(', ')}
             />
             <CardContent dangerouslySetInnerHTML={{ __html: post.content }} />
         </Card>
