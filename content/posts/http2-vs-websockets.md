@@ -11,49 +11,203 @@ In this post, we will compare the performance of different approaches to load da
 
 We will start from sample dashboard created with Vue.js and Chart.js (which does not matter) and loaded over HTTP/1.1 (which does matter). It should look like this, and appearance of it would not change till the end of this article, but we will try to change how quickly it appears in the browser window:
 
-{{< figure src="dashboard.png" title="Our sample dashboard" width="600px">}}
+![Example dashboard](/content/dashboard.png "Our sample dashboard")
 
 Static content will be served by Nginx server, which would also be a proxy to our backend python server which would serve data. It will expose 8080 port for HTTP and 8083 for HTTPS:
 
 (If you are bored with lot's of code - scroll down, there will be explanations of what happens, I just publish it here to make this experiment reproducible)
 
 ```yml
-{{< include src="docker-compose.yml">}}
+version: '3'
+services:
+    server:
+        image: server
+        build:
+            context: .
+            dockerfile: nginx.docker
+        ports:
+            - 8080:80
+            - 8083:443
+    backend:
+        image: backend
+        build:
+            context: .
+            dockerfile: backend.docker
 ```
 
 Nginx container just runs image with a copy of configuration file and our HTML inside:
 
 ```docker
-{{< include src="nginx.docker">}}
+FROM nginx
+
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY dashboard.html /var/www/index.html
 ```
 
 And this is its configuration file. It tells to listen at port 80, serve files from `/var/www`, and redirect requests to all URLs that have prefix `/api/` to our backend container:
 
 ```
-{{< include src="nginx.conf">}}
+user nginx;
+
+events {
+  worker_connections 1024;
+}
+
+http {
+    sendfile on;
+    
+    include /etc/nginx/mime.types;
+
+    server {
+        listen 80;
+
+        root /var/www;
+
+        location /api/ {
+            proxy_pass      http://backend:8080/;
+        }
+    }
+}
 ```
 
 Here is Dockerfile for backend server:
 
 ```docker
-{{< include src="backend.docker">}}
+FROM python:3.7
+
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /code
+WORKDIR /code
+
+RUN pip install sanic
+COPY server.py /code/server.py
+
+EXPOSE 8080
+
+CMD python /code/server.py
 ```
 
 It has Python3.7 inside, installs Sanic framework, exposes port 8080 and runs `server.py`, which will provide us with data:
 
 ```python
-{{< include src="server.py">}}
+import asyncio
+import random
+
+from sanic import Sanic
+from sanic.response import json as json_response
+
+app = Sanic() # It is almost like Flask, just asyncronous
+
+@app.route('/data/<data:int>')
+async def return_data(request, data):
+    return json_response(await get_data(
+        data, int(request.args.get('size', 10))
+    ))
+
+async def get_data(data, size):
+    # First we wait 1-5 seconds to simulate request to database
+    await asyncio.sleep(1 + random.random() * 4)
+
+    # then start random walk from point that equals to data given
+    # This is done to be able to distinguish between different graphs
+    position = data
+    data = []
+    for i in range(size):
+        position += random.random() - 0.5
+        data.append(position)
+    # And return the data of that random walk
+    return data
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)
+
 ```
 
 And the biggest listing in this post - HTML (well, mostly JavaScript) of the dashboard:
 
 ```html
-{{< include src="dashboard.html">}}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        .chart {
+            width: 350px; height: 200px;
+            margin: 3px; border: 1px solid black;
+            position: relative; float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>Loaded charts: {{loaded_chart_count}}</p>
+        <div v-for="chart in charts" class="chart">
+            <chart :widget="chart" v-once></chart>
+        </div>
+    </div>
+  
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.min.js'></script>
+
+<script >
+console.time('load'); // Measure time from here to end of load
+const DATA_LEN = 50;
+const CHARTS_COUNT = 50;
+
+var data = {
+    charts: _.range(CHARTS_COUNT),
+    loaded_chart_count: 0,
+};
+
+
+Vue.component('chart', {
+  template: '<canvas width="350" height="200"></canvas>',
+  props: ['widget'],
+  mounted: function() {
+    createChart(this.$el, this.widget);
+  }
+});
+
+var createChart = function(el, widget) {
+    // Load data and render line chart in given element
+    loadData(widget, function(chart_data) {
+      new Chart(el, {
+          type: 'line',
+          data: {
+              labels: _.range(chart_data.length),
+              datasets: [{
+                  label: 'Data ' + widget,
+                  data: chart_data,
+              }]
+          },
+      });
+      data.loaded_chart_count ++;
+      if(data.loaded_chart_count == CHARTS_COUNT) {
+        console.timeEnd('load'); // stop load timer
+      }
+    });
+};
+
+new Vue({
+  el: "#app",
+  data: data
+});
+
+function loadData(widget, cb) {
+    // Load data for widget given, and when it is loaded - call cb
+    fetch('/api/data/' + widget + '?size=' + DATA_LEN).then(res => res.json()).then(cb);
+}
+</script>
+</body>
+</html>
 ```
 
 It loads Charts.js and Vue using CDN and renders `CHARTS_COUNT` charts. We will work here with the function `loadData()`, to see what we could improve. But first - test our baseline. Run `docker-compose up` and check how quickly it loads. We could do it in browser console using `console.time`, and on network tab:
 
-{{< figure src="network_debug.png" title="Screenshot of network tab of browser debugger" width="600px">}}
+![](/content/network_debug.png "Screenshot of network tab of browser debugger")
 
 29 seconds for 50 graphs? When all the JavaScript was loaded from cache? Not cool. Not cool at all.
 
@@ -61,7 +215,7 @@ It loads Charts.js and Vue using CDN and renders `CHARTS_COUNT` charts. We will 
 
 But why it takes so much? Lets open request details:
 
-{{< figure src="request_timings.png" title="Time of separate request" width="600px">}}
+![](/content/request_timings.png "Time of separate request")
 
 We see that 24 seconds are spent in **Blocked** state, and 4.5 in **Waiting**, everything else is negligible. Here what [Mozilla documentation](https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor/request_details#Timings) has to say about that states:
 
@@ -226,7 +380,7 @@ And now, update `nginx.conf` server section with this:
 
 Now, when we open https://localhost:8083/ in a browser, and check network tab, we will see this:
 
-{{< figure src="http2_network_debug.png" title="Requests with HTTP2" width="600px">}}
+![](/content/http2_network_debug.png "Requests with HTTP2")
 
 5.3 seconds and all requests start at the same time. Same speed improvement as WebSockets, but this time we just changed Nginx config, and not touched front-end or back-end code at all. 
 
