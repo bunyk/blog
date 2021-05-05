@@ -6,7 +6,3 @@ Code to render my blog and its contents.
 npm install
 npm run dev
 ```
-
-## TODO:
-- finish topics pages
-- support pages
