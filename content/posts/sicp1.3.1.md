@@ -11,7 +11,7 @@ Solving more exercises, trying not to skip to be able to learn next chapters bet
 
 ## Exercise 1.29 Simpson rule integration
 
-{{< highlight scheme >}}
+```scheme
 (define (cube x) (* x x x))
 (define (integral f a b dx)
   (define (add-dx x) (+ x dx))
@@ -46,47 +46,47 @@ Solving more exercises, trying not to skip to be able to learn next chapters bet
 (simpson-rule-integral cube 0 1 10)
 ;Value: 1/4
 
-{{< /highlight >}}
+```
 
 Seems to work very precise. Gives rational numbers, wow. Even when try with different functions:
 
-{{< highlight scheme >}}
+```scheme
 (define (identity x) x)
 (simpson-rule-integral identity 0 1 10)
 ;Value: 1/2
-{{< /highlight >}}
+```
 
 ## Exercise 1.30 Iterative summation
-{{< highlight scheme >}}
+```scheme
 (define (sum term a next b)
   (define (iter a result)
     (if (> a b)
         result
         (iter (next a) (+ (term a) result))))
   (iter a 0))
-{{< /highlight >}}
+```
 
 ## Exercise 1.31 Product
-{{< highlight scheme >}}
+```scheme
 (define (product term a next b)
   (define (iter a result)
     (if (> a b)
         result
         (iter (next a) (* (term a) result))))
   (iter a 1))
-{{< /highlight >}}
+```
 
 Factorial:
 
-{{< highlight scheme >}}
+```scheme
 (define (inc i) (+ i 1))
 (define (identity x) x)
 (define (factorial n) (product identity 1 inc n))
-{{< /highlight >}}
+```
 
 Approximating Pi:
 
-{{< highlight scheme >}}
+```scheme
 (define (pi precision) 
     (define (term i)
         (define k (* i 2))
@@ -96,21 +96,21 @@ Approximating Pi:
 )
 (pi 100)
 ;Value: 3.1493784731686008
-{{< /highlight >}}
+```
 
 Recursive product:
-{{< highlight scheme >}}
+```scheme
 (define (product term a next b)
     (if (> a b)
         1
         (* (term a) (product term (next a) next b))
     )
 )
-{{< /highlight >}}
+```
 
 ## Exercise 1.32: Accumulate
 
-{{< highlight scheme >}}
+```scheme
 (define (accumulate combiner null-value term a next b)
   (if (> a b)
     null-value
@@ -128,10 +128,10 @@ Recursive product:
 (define (product term a next b)
   (accumulate * 1 term a next b)
 )
-{{< /highlight >}}
+```
 
 Iterative:
-{{< highlight scheme >}}
+```scheme
 (define (accumulate combiner null-value term a next b)
   (define (iter a result)
     (if (> a b)
@@ -141,11 +141,11 @@ Iterative:
   )
   (iter a null-value)
 )
-{{< /highlight >}}
+```
 
 ## Exercise 1.33 Filtered accumulate
 
-{{< highlight scheme >}}
+```scheme
 (define (filtered-accumulate combiner null-value term a next b filter)
   (define (iter a result)
     (if (> a b)
@@ -169,4 +169,4 @@ Iterative:
     )
     (filtered-accumulate * 1 identity 1 inc n !rel-prime)
 )
-{{< /highlight >}}
+```

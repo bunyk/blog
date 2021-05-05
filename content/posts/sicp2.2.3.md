@@ -11,7 +11,7 @@ Here we become skilled in list manipulation and build a set of useful subroutine
 
 ## Exercise 2.33
 
-{{< highlight scheme >}}
+```scheme
 (define (accumulate op initial sequence)
   (if (null? sequence)
       initial
@@ -31,11 +31,11 @@ Here we become skilled in list manipulation and build a set of useful subroutine
 
 (define (length sequence)
   (accumulate (lambda (x y) (+ 1 y)) 0 sequence))
-{{< /highlight >}}
+```
 
 ## Exercise 2.34
 
-{{< highlight scheme >}}
+```scheme
 (define (horner-eval x coefficient-sequence)
   (accumulate (lambda (this-coeff higher-terms) (+ this-coeff (* higher-terms x)))
               0
@@ -43,23 +43,23 @@ Here we become skilled in list manipulation and build a set of useful subroutine
 
 (horner-eval 2 (list 1 3 0 5 0 1))
 ; 79
-{{< /highlight >}}
+```
 
 ## Exercise 2.35
 
-{{< highlight scheme >}}
+```scheme
 (define (identity x) x)
 
 (define (count-leaves t)
   (accumulate (lambda (head tail)
     (+ (if (pair? head) (count-leaves head) 1) tail)
   ) 0 (map identity t)))
-{{< /highlight >}}
+```
 
 Don't know why map is here...
 
 ## Exercise 2.36
-{{< highlight scheme >}}
+```scheme
 (define (accumulate-n op init seqs)
   (if (null? (car seqs))
       nil
@@ -68,11 +68,11 @@ Don't know why map is here...
 
 (define s (list (list 1 2 3) (list 4 5 6) (list 7 8 9) (list 10 11 12)))
 (accumulate-n + 0 s)
-{{< /highlight >}}
+```
 
 ## Exercise 2.37
 
-{{< highlight scheme >}}
+```scheme
 (define (dot-product v w)
   (accumulate + 0 (map * v w)))
 
@@ -93,7 +93,7 @@ Don't know why map is here...
             cols
            )
          ) m)))
-{{< /highlight >}}
+```
 
 
 ## Exercise 2.38
@@ -103,16 +103,16 @@ I guess, if operation is commutative and associative, then it does not matter wh
 
 ## Exercise 2.39
 
-{{< highlight scheme >}}
+```scheme
 (define (reverse sequence)
   (fold-right (lambda (x y) (append y (list x))) nil sequence))
 (define (reverse sequence)
   (fold-left (lambda (x y) (cons y x)) nil sequence))
-{{< /highlight >}}
+```
 
 # Exercise 2.40
 
-{{< highlight scheme >}}
+```scheme
 (define (enumerate-interval low high)
   (if (> low high)
       nil
@@ -156,11 +156,11 @@ I guess, if operation is commutative and associative, then it does not matter wh
   (map make-pair-sum
        (filter prime-sum? (unique-pairs n))))
 (prime-sum-pairs 6)
-{{< /highlight >}}
+```
 
 ## Exercise 2.41
 
-{{< highlight scheme >}}
+```scheme
 ; 1 <= i < j < k <= n
 ; i + j + k = s
 (define (triplets n s)
@@ -179,12 +179,12 @@ I guess, if operation is commutative and associative, then it does not matter wh
     (enumerate-interval 1 (- n 2))
   ))
 (triplets 4 6)
-{{< /highlight >}}
+```
 
 
 ## Exercise 2.42
 
-{{< highlight scheme >}}
+```scheme
 (define empty-board (list)) ; or nil
 (define (adjoin-position new-row k rest-of-queens)
   (cons new-row rest-of-queens)
@@ -289,7 +289,7 @@ I guess, if operation is commutative and associative, then it does not matter wh
 ; Q . . . . .
 ; . . Q . . .
 ; . . . . Q .
-{{< /highlight >}}
+```
 
 ## Exercise 2.43
 

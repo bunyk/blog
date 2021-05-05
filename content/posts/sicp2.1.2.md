@@ -13,7 +13,7 @@ Code in exercises becomes more verbose.
 
 ## Exercise 2.2
 
-{{< highlight scheme >}}
+```scheme
 (define make-segment cons)
 (define start-segment car)
 (define end-segment cdr)
@@ -47,11 +47,11 @@ Code in exercises becomes more verbose.
 (define ab (make-segment a b))
 
 (print-point (mid-segment ab))
-{{< /highlight >}}
+```
 
 ## Exercise 2.3
 
-{{< highlight scheme >}}
+```scheme
 (define make-rect cons)
 
 (define (area rect) 
@@ -111,4 +111,4 @@ Code in exercises becomes more verbose.
     (y-point (cdr rect))
   ))
 )
-{{< /highlight >}}
+```

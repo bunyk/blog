@@ -10,7 +10,7 @@ Here is how you construct rational number:
 
 <!--more-->
 
-{{< highlight scheme >}}
+```scheme
 (define (make-rat n d)
   (let ((g (gcd n d))
        (sign (if (< d 0) -1 1)))
@@ -24,6 +24,6 @@ Here is how you construct rational number:
   (display (numer x))
   (display "/")
   (display (denom x)))
-{{< /highlight >}}
+```
 
 That's it, change sign of both parts when denominator is negative, you could do that by multiplying or dividing by -1.

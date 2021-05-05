@@ -11,7 +11,7 @@ This section blows your mind by showing that data could be represented by functi
 
 ##  Exercise 2.4
 
-{{< highlight scheme >}}
+```scheme
 (define (cons x y)
   (lambda (m) (m x y)))
 
@@ -20,11 +20,11 @@ This section blows your mind by showing that data could be represented by functi
 
 (define (cdr z)
   (z (lambda (p q) q)))
-{{< /highlight >}}
+```
 
 ##  Exercise 2.5
 
-{{< highlight scheme >}}
+```scheme
 ; Recursive process and linear time, could be done better
 ; but I'm to lazy to copy from previous exercises
 (define (pow x n) 
@@ -53,11 +53,11 @@ This section blows your mind by showing that data could be represented by functi
 (define (cdr z)
   (count-divisor z 3)
 )
-{{< /highlight >}}
+```
 
 ##  Exercise 2.6
 
-{{< highlight scheme >}}
+```scheme
 (define zero (lambda (f) (lambda (x) x)))
 
 (define (inc n) (lambda (f) (lambda (x) (f ((n f) x)))))
@@ -77,7 +77,7 @@ This section blows your mind by showing that data could be represented by functi
 
 (church-to-int (plus one two))
 ;Value: 3
-{{< /highlight >}}
+```
 
 There is also nice video from Computerphile that explains how to build Boolean algebra from lambda calculus:
 {{< youtube eis11j_iGMs >}}

@@ -13,7 +13,7 @@ Also here some trivial exercises are skipped, because one with drawing I done on
 
 ## Exercise 2.25
 
-{{< highlight scheme >}}
+```scheme
 (define l (list 1 3 (list 5 7) 9))
 l
 (car (cdr (car (cdr (cdr l)))))
@@ -25,11 +25,11 @@ l
 (define l (list 1 (list 2 (list 3 (list 4 (list 5 (list 6 7)))))))
 l
 (car (cdr (car (cdr (car (cdr (car (cdr (car (cdr (car (cdr l))))))))))))
-{{< /highlight >}}
+```
 
 ## Exercise 2.27
 
-{{< highlight scheme >}}
+```scheme
 (define x (list (list 1 2) (list 3 4)))
 (reverse x)
 
@@ -48,11 +48,11 @@ l
   )
   (iter l nil)
 )
-{{< /highlight >}}
+```
 
 ## Exercise 2.28
 
-{{< highlight scheme >}}
+```scheme
 (define (fringe t)
   (define (iter src dst)
     (cond
@@ -69,12 +69,12 @@ l
   )
   (reverse (iter t nil))
 )
-{{< /highlight >}}
+```
 
 ## Exercise 2.29
 
 Constructors and selectors:
-{{< highlight scheme >}}
+```scheme
 (define (make-mobile left right)
   (list left right))
 
@@ -92,10 +92,10 @@ Constructors and selectors:
 
 (define (branch-structure branch)
   (car (cdr branch)))
-{{< /highlight >}}
+```
 
 Test data:
-{{< highlight scheme >}}
+```scheme
 (define m1 
   (make-mobile 
     (make-branch 1 10)
@@ -120,9 +120,9 @@ Test data:
         (make-branch 1 10)
     )
 )
-{{< /highlight >}}
+```
 
-{{< highlight scheme >}}
+```scheme
 (define (total-weight mobile) 
   (if (pair? mobile)
     (+
@@ -162,32 +162,32 @@ Test data:
 (balanced m1)
 (balanced m2)
 (balanced m3)
-{{< /highlight >}}
+```
 
 With `balanced` I was stuck, too many levels of nesting. As usual, I [asked on StackOverflow](https://stackoverflow.com/questions/62962576/how-to-find-where-scheme-calls-integer-less), went to sleep and in the morning found bug, then someone answered my very obvious question.
 
 Part d. If we have such constructors:
-{{< highlight scheme >}}
+```scheme
 (define (make-mobile left right)
   (cons left right))
 (define (make-branch length structure)
   (cons length structure))
-{{< /highlight >}}
+```
 
 We only have to change such selectors:
-{{< highlight scheme >}}
+```scheme
 (define (right-branch mobile)
   (cdr mobile))
 (define (branch-structure branch)
   (cdr branch))
-{{< /highlight >}}
+```
 
 Layers of abstraction are useful (sometimes).
 
 
 ## Exercise 2.30
 
-{{< highlight scheme >}}
+```scheme
 (define (square-tree t) 
   (cond 
     ((null? t) nil)
@@ -200,20 +200,20 @@ Layers of abstraction are useful (sometimes).
  (list 1
        (list 2 (list 3 4) 5)
        (list 6 7)))
-{{< /highlight >}}
+```
 
 Version with map:
-{{< highlight scheme >}}
+```scheme
 (define (square-tree t) 
   (if (pair? t)
     (map square-tree t)
     (sqr t)
   )
 )
-{{< /highlight >}}
+```
 
 ## Exercise 2.31
-{{< highlight scheme >}}
+```scheme
 (define (tree-map f t) 
   (if (pair? t)
     (map (lambda (t) (tree-map f t)) t)
@@ -225,12 +225,12 @@ Version with map:
  (list 1
        (list 2 (list 3 4) 5)
        (list 6 7)))
-{{< /highlight >}}
+```
 
 
 ## Exercise 2.32
 
-{{< highlight scheme >}}
+```scheme
 (define (subsets s)
   (if (null? s)
       (list nil)
@@ -239,7 +239,7 @@ Version with map:
           rest
           (map (lambda (ss) (cons (car s) ss)) rest)
         ))))
-{{< /highlight >}}
+```
 
 Emtpy set has only one subset - empty. Otherwise each element in the set doubles number of elements in the set of subsets - it creates subsets that are just like subsets without that element, except that they include it.
 

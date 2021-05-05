@@ -1,17 +1,24 @@
 #!/bin/bash
+set -ex
 
-echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
+npm run build
+npm run export
 
-# Build the project.
-hugo # if using a theme, replace with `hugo -t <YOURTHEME>`
-
-# Go To Public folder
-cd public
-# Add changes to git.
+# This expects that 
+# git clone git@github.com:bunyk/bunyk.github.com.git
+# was done in sibling folder
+cd ..
+rm -r bunyk.github.com/content/
+rm -r bunyk.github.com/month/
+rm -r bunyk.github.com/_next/
+rm -r bunyk.github.com/page/
+rm -r bunyk.github.com/posts/
+rm -r bunyk.github.com/tag/
+cp -r blog/out/* bunyk.github.com
+cd bunyk.github.com
 git add .
 
-# Commit changes.
-msg="rebuilding site `date`"
+msg="blog update `date`"
 if [ $# -eq 1 ]
   then msg="$1"
 fi
@@ -21,4 +28,4 @@ git commit -m "$msg"
 git push origin master
 
 # Come Back up to the Project Root
-cd ..
+cd ../blog

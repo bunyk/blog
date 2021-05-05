@@ -11,7 +11,7 @@ This was more boring in comparison to previous section, probably because it requ
 
 ## Exercise 2.59
 
-{{< highlight scheme >}}
+```scheme
 (define (element-of-set? x set)
   (cond ((null? set) false)
         ((equal? x (car set)) true)
@@ -29,44 +29,44 @@ This was more boring in comparison to previous section, probably because it requ
     set2
   )
 )
-{{< /highlight >}}
+```
 
 ## Exercise 2.60
 
-{{< highlight scheme >}}
+```scheme
 (define (element-of-set? x set)
   (cond ((null? set) false)
         ((equal? x (car set)) true)
         (else (element-of-set? x (cdr set)))))
-{{< /highlight >}}
+```
 
 O(n), as unique one, but here list could be way longer, so less performant.
 
 
-{{< highlight scheme >}}
+```scheme
 (define (adjoin-set x set)
   (cons x set)
 )
-{{< /highlight >}}
+```
 
 O(1), lot better than unique one ( O(n)), because we not checking uniqueness.
 
-{{< highlight scheme >}}
+```scheme
 (define (union-set set1 set2)
   (append set1 set2)
 )
-{{< /highlight >}}
+```
 
 Append has complexity O(n) = O(len(set1)) if I'm not mistaken. O(n), better than O(n<sup>2</sup>).
 
-{{< highlight scheme >}}
+```scheme
 (define (intersection-set set1 set2)
   (cond ((or (null? set1) (null? set2)) '())
         ((element-of-set? (car set1) set2)        
          (cons (car set1)
                (intersection-set (cdr set1) set2)))
         (else (intersection-set (cdr set1) set2))))
-{{< /highlight >}}
+```
 
 Intersection has same implementation and as a result same asymptotic complexity O(n<sup>2</sup>), but we expect n to be a lot larger.
 
@@ -74,7 +74,7 @@ So, this approach would suit applications where we will do a lot of adjoins and 
 
 ## Exercise 2.61
 
-{{< highlight scheme >}}
+```scheme
 (define (adjoin-set x set)
   (cond ((or (null? set) (< x (car set))) (cons x set))
         ((= x (car set)) set)
@@ -84,11 +84,11 @@ So, this approach would suit applications where we will do a lot of adjoins and 
 (adjoin-set 1 (list 1 3))
 (adjoin-set 2 (list 1 3))
 (adjoin-set 4 (list 1 3))
-{{< /highlight >}}
+```
 
 ## Exercise 2.62
 
-{{< highlight scheme >}}
+```scheme
 (define (union-set set1 set2)
     (cond
         ((null? set1) set2)
@@ -99,7 +99,7 @@ So, this approach would suit applications where we will do a lot of adjoins and 
 )
 (union-set (list 1 2) (list 3 4))
 (union-set (list 2 3) (list 1 4))
-{{< /highlight >}}
+```
 
 
 ## Exercise 2.63
@@ -111,7 +111,7 @@ In case with append, we compute `tree->list1` for both subtrees simultaniously, 
 
 
 ## Exercise 2.64
-{{< highlight scheme >}}
+```scheme
 (define (list->tree elements)
   (car (partial-tree elements (length elements))))
 
@@ -130,7 +130,7 @@ In case with append, we compute `tree->list1` for both subtrees simultaniously, 
                     (remaining-elts (cdr right-result)))
                 (cons (make-tree this-entry left-tree right-tree)
                       remaining-elts))))))))
-{{< /highlight >}}
+```
 
 `partial-tree` takes as arguments `elts` - list of elements, and integer `n` and returns pair whose `car` is balanced tree containing the first `n` elements of the list and `cdr` is the list of elements not included in the tree.
 
@@ -160,17 +160,17 @@ Finally coding and not writing essays. I'm bad at essays (probably need another 
 
 I imagine we convert both trees to ordered lists, then use operations on ordered lists described in previous section, then convert back to trees. All of this operations take O(n).
 
-{{< highlight scheme >}}
+```scheme
 (define (union-set s1 s2)
   (list->tree (list-union-set (tree->list2 s1) (tree->list2)))
 )
-{{< /highlight >}}
+```
 
 Same for intersection, just call different function. I'm even not going to test this code, as it will be more effort than writing it.
 
 ## Exercise 2.66
 
-{{< highlight scheme >}}
+```scheme
 (define (lookup given-key set-of-records)
   (cond ((null? set-of-records) false)
         ((= given-key (key (entry set-of-records)))
@@ -179,5 +179,5 @@ Same for intersection, just call different function. I'm even not going to test 
          (lookup (left-branch set-of-records)))
         (else
          (lookup (right-branch set-of-records)))))
-{{< /highlight >}}
+```
 

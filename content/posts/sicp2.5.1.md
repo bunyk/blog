@@ -7,7 +7,8 @@ tags:
 In [previous post](/posts/sicp2.4/) I have used wrong StackOverflow answer. :) Or, to be more precise, right answer for that section, but useless here, as we want to store in table functions for multiple arguments. 
 
 [Correct answer](https://stackoverflow.com/a/19114031/816449) that supports lists looks like this:
-{{< highlight scheme >}}
+
+```scheme
 (define *op-table* (make-hash-table))
 
 (define (put op type proc)
@@ -15,13 +16,13 @@ In [previous post](/posts/sicp2.4/) I have used wrong StackOverflow answer. :) O
 
 (define (get op type)
   (hash-table/get *op-table* (list op type) #f))
-{{< /highlight >}}
+```
 
 <!--more-->
 
 Also I needed to copypaste a lot of code to be able to start working on [first exercise](#exercise-2-77): 
 
-{{< highlight scheme >}}
+```scheme
 (define (attach-tag type-tag contents)
   (cons type-tag contents))
 (define (type-tag datum)
@@ -138,52 +139,52 @@ Also I needed to copypaste a lot of code to be able to start working on [first e
   (put 'angle '(complex) angle)
   'done)
 (install-complex-package)
-{{< /highlight >}}
+```
 
 ## Exercise 2.77
 
-{{< highlight scheme >}}
+```scheme
 (define z (cons 'complex (cons 'rectangular (cons 3 4))))
 
 (magnitude z)
-{{< /highlight >}}
+```
 
 It calls `apply-generic` to do operation `'magnitude` with z
 
-{{< highlight scheme >}}
+```scheme
 (apply-generic 'magnitude (cons 'complex (cons 'rectangular (cons 3 4))))
-{{< /highlight >}}
+```
 
 `apply-generic` looks for operation `'magnitude` for `'complex` numbers, and applies it to value inside
 
-{{< highlight scheme >}}
+```scheme
 (apply (get 'magnitude 'complex) (cons 'rectangular (cons 3 4)))
-{{< /highlight >}}
+```
 
 That operation, thanks to Alyssa P. Hacker, is just application of same `magnitude` function, but this time for `'rectangular` object
 
-{{< highlight scheme >}}
+```scheme
 (magnitude (cons 'rectangular (cons 3 4)))
-{{< /highlight >}}
+```
 
 apply-generic applies operation 'magnitude for 'rectangular type to content of rectangular "package":
 
-{{< highlight scheme >}}
+```scheme
 (apply (get 'magnitude 'rectangular) (cons 3 4))
-{{< /highlight >}}
+```
 
 which is `magnitude` function from inside rectangular package
 
-{{< highlight scheme >}}
+```scheme
 (magnitude (cons 3 4))
 (sqrt (+ (square 3)
          (square 4)))
 5
-{{< /highlight >}}
+```
 
 ## Exercise 2.78
 
-{{< highlight scheme >}}
+```scheme
 (define (attach-tag type-tag contents)
   (if (eq? type-tag 'scheme-number)
     contents
@@ -204,11 +205,11 @@ which is `magnitude` function from inside rectangular package
     (else (error "Bad tagged datum -- CONTENTS" datum))
   )
 )
-{{< /highlight >}}
+```
 
 To test:
 
-{{< highlight scheme >}}
+```scheme
 (define (add x y) (apply-generic 'add x y))
 (define (sub x y) (apply-generic 'sub x y))
 (define (mul x y) (apply-generic 'mul x y))
@@ -229,11 +230,11 @@ To test:
        (lambda (x) (tag x)))
   'done)
 (install-scheme-number-package)
-{{< /highlight >}}
+```
 
 ## Exercise 2.79
 
-{{< highlight scheme >}}
+```scheme
 (put 'equ? '(scheme-number scheme-number) =)
 
 (put 'equ? '(complex complex)
@@ -243,11 +244,11 @@ To test:
     ))
 )
 (define (equ? x y) (apply-generic 'equ? x y))
-{{< /highlight >}}
+```
 
 
 ## Exercise 2.80
-{{< highlight scheme >}}
+```scheme
 (put 'zero? '(scheme-number)
      (lambda (x) (= x 0))
 )
@@ -255,5 +256,5 @@ To test:
      (lambda (x) (= (magnitude x) 0))
 )
 (define (zero? x) (apply-generic 'zero? x))
-{{< /highlight >}}
+```
 

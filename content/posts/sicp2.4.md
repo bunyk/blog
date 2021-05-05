@@ -13,30 +13,30 @@ In this chapter we will need `get` and `put` functions which could be implemente
 
 Found this on [StackOverflow](https://stackoverflow.com/a/29465496/816449), of course.
 
-{{< highlight scheme >}}
+```scheme
 (define put 2d-put!)
 (define (get a b)
     ;(display "get ") (display a) (display b) (newline)
     (2d-get a b)
 )
-{{< /highlight >}}
+```
 
 <!--more-->
 
 And some setup from [previous section](/posts/sicp2.3.2/):
 
-{{< highlight scheme >}}
+```scheme
 (define variable? symbol?)
 (define (same-variable? v1 v2)
   (and (variable? v1) (variable? v2) (eq? v1 v2)))
 (define (=number? exp num)
   (and (number? exp) (= exp num)))
-{{< /highlight >}}
+```
 
 ## Exercise 2.73
 
 
-{{< highlight scheme >}}
+```scheme
 (define (deriv exp var)
    (cond ((number? exp) 0)
          ((variable? exp) (if (same-variable? exp var) 1 0))
@@ -44,13 +44,13 @@ And some setup from [previous section](/posts/sicp2.3.2/):
                                             var))))
 (define (operator exp) (car exp))
 (define (operands exp) (cdr exp))
-{{< /highlight >}}
+```
 
 a) So, in our new derive we do lookup in table instead of `cond` expression. We are not able to move `number?` into lookup, because `number?` is condition for a set of values, not just one value, and table works only with one value.
 
 b)
 
-{{< highlight scheme >}}
+```scheme
 (define (make-sum args) 
     (define (sum items total nonnum)
         (cond
@@ -104,13 +104,13 @@ b)
   (put 'deriv '* deriv-prod)
 )
 (install-derivatives-package) 
-{{< /highlight >}}
+```
 
 I think I wrote too much code here because I wanted to support sums and products of multiple arguments.
 
 c) Exponentation
 
-{{< highlight scheme >}}
+```scheme
 (define (make-exp base e)
   (cond ((=number? e 0) 1)
         ((=number? e 1) base)
@@ -130,7 +130,7 @@ c) Exponentation
   (put 'deriv '** deriv-exp)
 
 (deriv '(+ (** x 3) (** x 2)) 'x)
-{{< /highlight >}}
+```
 
 d) We could switch arguments inside `get`, or inside `put`, or switch arguments when we call put. That's all what will be needed.
 
@@ -139,7 +139,7 @@ I skipped it because it is too abstract.
 
 ## Exercise 2.75
 
-{{< highlight scheme >}}
+```scheme
 (define (make-from-mag-ang r a) 
   (define (dispatch op)
     (cond ((eq? op 'real-part) (* r (cos a)))
@@ -149,7 +149,7 @@ I skipped it because it is too abstract.
           (else
            (error "Unknown op -- MAKE-FROM-REAL-IMAG" op))))
   dispatch)
-{{< /highlight >}}
+```
 
 ## Exercise 2.76
 Skip this too. Because I see no way to verify that I did it correctly. Learning needs feedback.
