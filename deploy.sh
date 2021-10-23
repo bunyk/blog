@@ -27,5 +27,5 @@ git commit -m "$msg"
 # Push source and build repos.
 git push origin master
 
-# Come Back up to the Project Root
+# Come back up to the project root
 cd ../blog
