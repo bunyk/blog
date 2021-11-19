@@ -4,7 +4,7 @@ import Header from './header'
 import Footer from './footer'
 
 
-import {SECTIONS, BLOG_TITLE} from '../constants'
+import {BLOG_TITLE} from '../constants'
 
 export default function Layout({children, title}) {
     return <>

@@ -1,35 +1,19 @@
-import {Grid, Card, CardHeader, CardContent, CardActions} from '@material-ui/core'
-import {makeStyles} from '@material-ui/core/styles'
+import {Grid} from '@material-ui/core'
+import Link from 'next/link'
 
-import Pagination from './pagination'
-import LinkButton from './linkbutton'
 import Layout from './layout'
-import Sidebar from './sidebar'
-
-const useStyles = makeStyles((theme) => ({
-    spaced: {
-        margin: theme.spacing(1),
-    }
-}));
 
 export default function PostList(props) {
-    const classes = useStyles();
     return <Layout>
         <Grid item xs={12} md={9}>
+			<ul>
             {props.posts.map(p => {
-                return <Card key={p.id} className={classes.spaced}>
-                    <CardHeader
-                        title={p.title}
-                        subheader={'Published: ' + p.date + ' Tags: ' + (p.tags || []).join(', ')}
-                    />
-                    <CardContent dangerouslySetInnerHTML={{ __html: p.excerpt }} />
-                    <CardActions>
-                        <LinkButton href={`/posts/${p.id}`}>More</LinkButton>
-                    </CardActions>
-                </Card>
+                return <li key={p.id}>
+					<Link href={`/posts/${p.id}`}>{p.title}</Link> 
+                    <span> ({[p.date].concat(p.tags || []).join(', ')})</span>
+                </li>
             })}
-            <Pagination count={props.pagesCount} page={props.pageNumber} pageURL={props.pageURL}/>
+			</ul>
         </Grid>
-        <Sidebar archives={props.archives} topics={props.topics}/>
     </Layout>
 }
