@@ -1,7 +1,13 @@
-import {Typography} from '@material-ui/core'
+import Link from 'next/link'
 
 export default function Footer() {
-    return <Typography variant="body2" color="textSecondary" align="center">
-      © {new Date().getFullYear()} Bunyk Taras. Built with Material UI & Next.js
-    </Typography>
+    return <>
+		<nav>
+			<Link href="/" passHref>Home</Link>
+			<a href="#top">Back to top</a>
+		</nav>
+		<footer>
+		  © {new Date().getFullYear()} Bunyk Taras. Built with Next.js
+    	</footer>
+	</>
 }
