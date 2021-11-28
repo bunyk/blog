@@ -9,11 +9,8 @@ npm run export
 # was done in sibling folder
 cd ..
 rm -r bunyk.github.com/content/
-rm -r bunyk.github.com/month/
 rm -r bunyk.github.com/_next/
-rm -r bunyk.github.com/page/
 rm -r bunyk.github.com/posts/
-rm -r bunyk.github.com/tag/
 cp -r blog/out/* bunyk.github.com
 cd bunyk.github.com
 git add .

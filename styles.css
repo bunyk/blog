@@ -22,3 +22,8 @@ footer {
 nav a {
 	margin-right: 1em;
 }
+
+img {
+	width: 100%;
+	border: 2px outset #eee;
+}
