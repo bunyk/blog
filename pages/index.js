@@ -8,7 +8,7 @@ export default function Home(props) {
 		<ul>
 		{props.posts.map(p => {
 			return <li key={p.id}>
-				{p.date}: <Link href={`/posts/${p.id}`}>{p.title}</Link>
+				{p.date.split('T')[0]}: <Link href={`/posts/${p.id}`}>{p.title}</Link>
 			</li>
 		})}
 		</ul>

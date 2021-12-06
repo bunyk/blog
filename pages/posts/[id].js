@@ -7,7 +7,13 @@ export default function Page(post) {
     return <Layout title={post.title}>
        <article>
             <h1>{post.title}</h1>
-            <div>{'Published: ' + post.date}</div>
+            <div><em>
+				{'Published: ' + post.date}
+				{/*
+					TODO: rename date to created_at, make both dates, not strings, maybe switch to TS
+						(post.updated_at != post.date)? ' Updated: ' + post.updated_at:''
+				*/}
+			</em></div>
             <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </article>
         <CommentsSection post={post}/>
