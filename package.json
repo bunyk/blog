@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "export": "next export",
+    "postexport": "node scripts/post-export.script.mjs",
     "start": "next start"
   },
   "dependencies": {
@@ -23,7 +24,9 @@
     "remark-rehype": "^10.0.1"
   },
   "devDependencies": {
+    "@types/node": "^16.11.11",
     "@types/react": "^17.0.37",
+    "ts-node": "^10.4.0",
     "typescript": "^4.5.2"
   }
 }

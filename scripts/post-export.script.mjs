@@ -1,9 +1,11 @@
-import {getSortedPostsData} from '../lib/posts'
+import {getSortedPostsData} from '../lib/posts.mjs'
+import { writeFileSync } from 'fs';
 
-// dummy function, actual content will be passed to res argument of getServerSideProps
-export default function Sitemap() {}
+async function main() {
+	await createSitemap();
+}
 
-export async function getServerSideProps({ res }) {
+async function createSitemap() {
 	const posts = await getSortedPostsData();
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -25,12 +27,8 @@ export async function getServerSideProps({ res }) {
           .join("")}
       </urlset>
     `;
+    writeFileSync("out/sitemap.xml", sitemap);
+}
 
-  res.setHeader("Content-Type", "text/xml");
-  res.write(sitemap);
-  res.end();
 
-  return {
-    props: {},
-  };
-};
+await main();
