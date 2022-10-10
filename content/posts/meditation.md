@@ -3,36 +3,34 @@ title: "Increasing your spontaneous introspective awareness reps"
 date: 2021-12-07T18:41:07+01:00
 ---
 
-If you don't do push ups - you definitely should do some, it has multiple benefits. Same with meditation.
+If you don't do push-ups - you definitely should do some, it has many benefits. Same with meditation.
 
-Here, I'm going to share with you two approaches to meditation, which made more sense to me than everything I have read before, including Headspace. In the web they are known as "doing nothing" and "TMI (The mind illuminated)".
+I'm going to share with you two approaches to meditation. The ones that made more sense to me than everything I have read before, including Headspace and Calm apps. On the web they are called "doing nothing" and "TMI (The mind illuminated)".
 
 ## Art of doing nothing
-Recently YouTube algorithm recommended to me [podcast of Joe Rogan where he does interview with Raval Navikant](https://www.youtube.com/watch?v=3qHkcs3kG44).
-
-There he shared interesting idea of the art of doing nothing.
+Recently YouTube algorithm recommended to me [Joe Rogan interview with Raval Navikant](https://www.youtube.com/watch?v=3qHkcs3kG44). Interviewee shared an interesting idea about the art of doing nothing.
 
 Modern people find it hard to just sit, and do nothing. Because it is the most boring thing to do. Sit and scroll Facebook - well, that is completely different. It makes even less sense to scroll Facebook, yet it is a lot more exciting for our brains. Because developers of apps spend a lot of effort to make our phones addictive.
 
-Raval says that modern humans have huge backlog of unresolved issues and thoughts you need to think over, and it constantly grows, since we constantly keep our brains occupied by external stimuli. So, our brain has no time to process that backlog. 
+Raval says that modern humans have huge backlog of unresolved issues and thoughts you need to think over. And it constantly grows, since we constantly keep our brains occupied by external stimuli. So, our brain has no time to process that backlog. 
 
-To achieve inner piece, according to Raval, you need to sit, close your eyes, and do nothing for an hour. Make no effort. If you think - think. If you don't - don't. Don't make effort to think, don't make effort to not thing, just sit and do nothing. 
+To achieve inner peace, according to Raval, you need to sit, close your eyes, and do nothing for an hour. Make no effort. If you think - think. If you don't - don't. Don't make effort to think, don't make effort to not think, just sit and do nothing. 
 
-And you need to do this every day, at least for an hour, because brain needs time to settle down and calm. And you need at least 60 days to process your backlog. And then you will have inner peace.
+And you need to do this every day, at least for an hour, because the brain needs time to settle down and calm. And you need at least 60 days to process your backlog. And then you will have inner peace.
 
 Raval has a [series of tweets about this kind of meditation](https://twitter.com/naval/status/1261481222359801856?lang=en).
 
-I tried this 3 times (for a whole hour). No any noticeable effects yet. Obviously because it probably needs a lot more time.
+I tried this 3 times (for a whole hour). No noticeable effects yet. Because it probably needs more time.
 
-Ah, and there is this thing with timers. When you use software timer, you have this anxiety: "Will it ring after the time has passed? Or did it break, battery died or something? So I'll be sitting here in this meditation forever" So instead I use mechanical kitchen timer I found in grocery store nearby. It ticks while it runs, so I know it still runs. And then it stops ticking and rings. And I could be confident that it runs, because I hear ticking, so I could return back to meditation with a calm mind.
+Ah, and there is this thing with timers. When you use a software timer, you have this anxiety: "Will it ring after the time has passed? Or did it break, the battery died, or something? So I'll be sitting here in this meditation forever". So instead I use a mechanical kitchen timer I found in a nearby grocery store. It ticks while it runs, so I know it still runs. And then it stops ticking and rings. And I could be confident that it runs, because I hear ticking, so I could return back to meditation with a calm mind.
 
-But I'll guess, I'll do it when I go to bed, and my wife wants to sleep, so she requests to turn lights off and I could not read. I'll probably fall asleep very quickly, but it's another benefit. If I'll not fall asleep - at least instead of having to worry that I'm could not fall asleep, I could just relax and allow brain to do some cleanup even without sleeping. 
+But I'll guess, I'll do it when I go to bed, and my wife wants to sleep, so she requests to turn the lights off and I could not read. I'll probably fall asleep very quickly, but it's another benefit. If I'll not fall asleep - at least instead of having to worry that I'm could not fall asleep, I could just relax and allow brain to do some cleanup even without sleeping. 
 
 ## The mind illuminated
 
 There is another approach to meditation, described in book called "The mind illuminated". It claims to be the modern interpretation of what Buddha and his followers were suggesting. There they describe multiple levels, where on each level you practice to master objectives of that level and move to another level. From establishing a practice, to achieving enlightenment. 
 
-I'm still on level 1 - establishing a practice, so you need to take my words with a grain of salt, but I could tell you what I already learned from that book, and how it's different from what I did when I tried meditation before.
+I'm still on level 1 - establishing a practice, so you need to take my words with a grain of salt. But I could tell you what I already learned from that book, and how it's different from what I did when I tried meditation before.
 
 Meditation is in a way similar to mental work. So, imagine you are writing an article about meditation, but then you need to do some research, like check if you correctly remember what Raval said on Joe Rogan podcast, go to YouTube, see another recommended video, and now you are falling into YouTube rabbit hole. That is not productive, and it's good if your brain reminds you that you should do something else in the current moment.
 
@@ -65,4 +63,4 @@ Then there is advice to do it for some time, and in the morning, but in the end 
 
 You could think: "after this 5 minutes I don't notice any effects". Don't think that, focus on your breath. Or work. 
 
-If you are not yet ready to buy the book, and this post did not explained enough, you could also read [The Ultimate Guide to Meditation for Programmers](https://codingmindfully.com/the-ultimate-guide-to-meditation-for-programmers/).
+If you are not yet ready to buy the book, and this post did not explain meditation good enough, you could also read [The Ultimate Guide to Meditation for Programmers](https://codingmindfully.com/the-ultimate-guide-to-meditation-for-programmers/).
