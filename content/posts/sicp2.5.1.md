@@ -4,7 +4,7 @@ date: 2020-09-02T19:27:13+02:00
 tags:
 - SICP
 ---
-In [previous post](/posts/sicp2.4/) I have used wrong StackOverflow answer. :) Or, to be more precise, right answer for that section, but useless here, as we want to store in table functions for multiple arguments. 
+In [previous post](/posts/sicp2.4) I have used wrong StackOverflow answer. :) Or, to be more precise, right answer for that section, but useless here, as we want to store in table functions for multiple arguments. 
 
 [Correct answer](https://stackoverflow.com/a/19114031/816449) that supports lists looks like this:
 
@@ -20,7 +20,7 @@ In [previous post](/posts/sicp2.4/) I have used wrong StackOverflow answer. :) O
 
 <!--more-->
 
-Also I needed to copypaste a lot of code to be able to start working on [first exercise](#exercise-2-77): 
+Also I needed to copypaste a lot of code to be able to start working on [first exercise](#exercise-277): 
 
 ```scheme
 (define (attach-tag type-tag contents)

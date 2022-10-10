@@ -7,7 +7,7 @@ tags:
 
 I decided to skip picture language, because of technical reasons. Also, 2.3.1 I'll do in this post, because it was just to short. Here we get one step clother to build interpreter, not yet for programming language, but at least for mathematical expressions.
 
-And now we are in the [middle of second chapter](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-16.html#%_sec_2.3).
+And now we are in the middle of second chapter.
 
 <!--more-->
 

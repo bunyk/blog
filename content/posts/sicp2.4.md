@@ -5,9 +5,7 @@ tags:
 - SICP
 ---
 
-I went on vacation and lost cadence on this project. Need to get back on track, remember how to lauch interpreter, etc. :)
-
-[Link to the chapter](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-17.html)
+I went on vacation and lost cadence on this project. Need to get back on track, remember how to launch interpreter, etc. :)
 
 In this chapter we will need `get` and `put` functions which could be implemented by similar system functions.
 
@@ -23,7 +21,7 @@ Found this on [StackOverflow](https://stackoverflow.com/a/29465496/816449), of c
 
 <!--more-->
 
-And some setup from [previous section](/posts/sicp2.3.2/):
+And some setup from [previous section](/posts/sicp2.3.2):
 
 ```scheme
 (define variable? symbol?)

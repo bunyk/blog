@@ -7,8 +7,6 @@ tags:
 
 Ok, second subchapter is more challenging, so I'll go by subsections.
 
-Here is [link to the chapter of the book I would solve today](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-11.html#%_sec_1.2.1)
-
 <!--more-->
 ## Exercise 1.9
 This is trivial. This procedure generates recursive process:
