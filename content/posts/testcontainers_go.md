@@ -13,12 +13,12 @@ To do that in Python world, you usually have some ORM, which connects to Postgre
 
 I though that similar thing is impossible in Go where it's not common to use ORM. Until my teammate with Java background introduced [`testcontainers`](https://golang.testcontainers.org/) library to our projects. Here is a [post about testcontainers for Java devs on engineering blog of my company](https://engineering.zalando.com/posts/2021/02/integration-tests-with-testcontainers.html).
 
-Now let's see how to write automated tests that verify the correct end to end behavior of an app, by creating a Postgres DB in a container.
+Now let's see how to write automated tests that verify the correct end to end behavior of an app, by creating a PostgreSQL DB in a container.
 
 <!--more-->
 
 ## Example service
-Let's imagine that we are building the rating service. It stores products (or restaurants, blog articles, StackOverflow comments, whatever). And users leave feedback in a form of a like or dislike. It will have following, simplified API:
+Let's imagine that we are building the rating service. It stores products (or restaurants, blog articles, Stack Overflow comments, whatever). And users leave feedback in a form of a like or dislike. It will have following, simplified API:
 
 - `POST /products {name: 'Go'}` - creates a new product with given name
 - `GET /products` returns products ordered by rating `[{id: 1, name: 'postgres' likes: 20, dislikes: 0}, {id: 2, name: 'MariaDB' likes: 15, dislikes: 6}, ...]`
@@ -239,7 +239,7 @@ func main() {
 ## Testing
 Now, how to test it? When we test manually, we connect to some database, like in `main.go` example above, and try different requests. We will do similar from our automated tests.<a id="testing"></a>
 
-But first, create yet another package to aid with our test database container creation. Le'ts call it `testdb`. Testcontainers help to create any docker containers from Go, `testdb` will create postgresql DB test container exactly for our needs.
+But first, create yet another package to aid with our test database container creation. Le'ts call it `testdb`. Testcontainers help to create any docker containers from Go, `testdb` will create PostgreSQL DB test container exactly for our needs.
 
 ```go
 package testdb
@@ -267,7 +267,7 @@ func (g TestLogConsumer) Accept(l testcontainers.Log) {
 
 var logConsumer TestLogConsumer
 
-// We hardcode credentials here, since it's for one-time DB
+// We hard-code credentials here, since it's for one-time DB
 // so they are not very important
 const (
 	db       = "test_db"
@@ -465,9 +465,9 @@ When we would want to do multiple independent tests, but share DB (because creat
 
 ## Debugging
 
-But suprise! When we run the tests above, they fail. Banana with one like is not rated above apple. To debug that, I pause tests execution by inserting  `time.Sleep(300 * time.Second)` where needed. 
+But surprise! When we run the tests above, they fail. Banana with one like is not rated above apple. To debug that, I pause tests execution by inserting  `time.Sleep(300 * time.Second)` where needed. 
 
-While tests sleep, we could open their DB and check what's going on. `docker ps` will show you name of the postgres container. And then: 
+While tests sleep, we could open their DB and check what's going on. `docker ps` will show you name of the PostgreSQL container. And then: 
 
 ```bash
 docker exec -it $CONTAINER_NAME psql -U test_user test_db
@@ -532,7 +532,7 @@ ok  	example/postest/api	(cached)	coverage: 71.4% of statements
 ?   	example/postest/store	[no test files]
 ?   	example/postest/testdb	[no test files]
 ```
-Inerestig here is that we wrote tests just for the `api` package, almost 75% of it is covered, but we found a bug inside store package. So coverage report is a little bit misleading. Probably it was designed for unit tests, that do not reach outside of their package.
+Interesting here is that we wrote tests just for the `api` package, almost 75% of it is covered, but we found a bug inside store package. So coverage report is a little bit misleading. Probably it was designed for unit tests, that do not reach outside of their package.
 
 To have better report do this:
 
@@ -559,10 +559,10 @@ In our example not covered are mostly error handling code like
 It executes when database itself has problems (or our query has errors). Such cases probably could be better covered with mocked DB (or not covered at all).
 
 ## Conclusion
-So we saw that tests found a bug in SQL code itself. If we had just unittests that tested logic in Go code and mocked database, this bug would not have been detected.  Yes, in simple example like this query could have been tested manually. But imagine how many bugs are hiding when you build your query dynamically?
+So we saw that tests found a bug in SQL code itself. If we had just unit-tests that tested logic in Go code and mocked database, this bug would not have been detected.  Yes, in simple example like this query could have been tested manually. But imagine how many bugs are hiding when you build your query dynamically?
 
-I have seen assertions made about final text of SQL query, but that is very brittle way to write testcases. You don't know if your query will work, and on every logic change you need to change most of your testcases.
+I have seen assertions made about final text of SQL query, but that is very brittle way to write test-cases. You don't know if your query will work, and on every logic change you need to change most of your test-cases.
 
 Downside of writing automated tests like this are that they are waaaay slower than normal ones. Like you could go make a tea while they run, especially when you create multiple test databases. But still faster than manual, once you wrote them.
 
-So such integration testing stands in the middle between manual and unit tests. It's slower than unittests, but faster than humans. It potentially finds more bugs than unittesting. But as any other kind of testing proves only that bugs exist, not that there are no bugs at all.
+So such integration testing stands in the middle between manual and unit tests. It's slower than unit-tests, but faster than humans. It potentially finds more bugs than unit-testing. But as any other kind of testing proves only that bugs exist, not that there are no bugs at all.
